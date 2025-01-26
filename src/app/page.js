@@ -7,7 +7,7 @@ import GamesSection from '@/components/landingPage/GamesSection';
 import TournamentsSection from '@/components/landingPage/TournamentsSection';
 import RulesSection from '@/components/landingPage/RulesSection';
 import Footer from '@/components/landingPage/Footer';
-// import ChatPopup from './components/ChatPopup';
+import ChatPopup from '@/components/landingPage/ChatPopup';
 // import LoginLinks from '@/app/LoginLinks'
 // export const metadata = {
 //     title: 'Laravel',
@@ -34,7 +34,7 @@ function Home() {
       <TournamentsSection />
       <RulesSection />
       <Footer />
-      {/* <ChatPopup /> */}
+      <ChatPopup />
     </div>
   );
 }

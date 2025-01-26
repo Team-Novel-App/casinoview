@@ -13,7 +13,7 @@ export default function Navigation({ isScrolled }) {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Gamepad2 className="w-8 h-8 text-game-primary animate-float" />
-            <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-game-primary via-game-secondary to-game-accent">
+            <span className="text-xl font-bold bg-clip-text bg-gradient-to-r from-game-primary via-game-secondary to-game-accent">
               GameRealm
             </span>
           </div>
