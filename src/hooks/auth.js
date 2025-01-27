@@ -35,6 +35,25 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             })
     }
 
+    const socialLogin = async ({setErrors, setStatus,provider}) => {
+        await csrf()
+
+        setErrors([])
+        setStatus(null)
+
+        axios
+            .get(`/auth/${provider}/redirect`)
+            .then(() => {
+                mutate();
+              router.push('/dashboard');
+            })
+            .catch(error => {
+                if (error.response.status !== 422) throw error
+
+                setErrors(error.response.data.errors)
+    })
+}
+
     const login = async ({ setErrors, setStatus, ...props }) => {
         await csrf()
 
@@ -122,5 +141,6 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
         resetPassword,
         resendEmailVerification,
         logout,
+        socialLogin,
     }
 }
