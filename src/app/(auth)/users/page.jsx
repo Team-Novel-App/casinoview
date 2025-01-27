@@ -1,8 +1,19 @@
 'use client';
 
 import React from 'react';
-
-const Login = () => {
+import { useAuth } from '@/hooks/auth';
+const SocialLogin = () => {
+  const { socialLogin } = useAuth({
+    middleware: 'guest',
+    redirectIfAuthenticated: '/dashboard'
+  });
+  const [errors, setErrors] = useState([]);
+  const handleSocialLogin = (provider) => {
+    socialLogin({
+      provider,
+      setErrors,
+    });
+  };
   return (
      <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 p-4">
       <div className="w-full max-w-md border-0 bg-white/80 backdrop-blur-sm rounded-lg p-8">
@@ -17,7 +28,7 @@ const Login = () => {
         <div className="space-y-4">
           <button 
             className="group relative w-full h-14 text-black hover:text-white hover:bg-[#1877F2] border border-[#1877F2]/30 hover:border-[#1877F2] transition-all duration-300 ease-out overflow-hidden rounded-lg"
-            onClick={() => {}}
+            onClick={() => handleSocialLogin('facebook')}
           >
             <div className="flex items-center justify-center w-full space-x-3">
               <img
@@ -30,7 +41,7 @@ const Login = () => {
           </button>
           <button 
             className="group relative w-full h-14 text-black hover:text-white hover:bg-[#EA4335] border border-[#EA4335]/30 hover:border-[#EA4335] transition-all duration-300 ease-out overflow-hidden rounded-lg"
-            onClick={() => {}}
+            onClick={() => handleSocialLogin('google')}
           >
             <div className="flex items-center justify-center w-full space-x-3">
               <img
@@ -53,4 +64,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SocialLogin;
