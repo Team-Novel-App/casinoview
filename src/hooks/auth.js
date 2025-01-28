@@ -14,7 +14,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             .catch(error => {
                 if (error.response.status !== 409) throw error
 
-                router.push('/verify-email')
+               // router.push('/verify-email')
             }),
     )
 
@@ -35,23 +35,11 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             })
     }
 
-    const socialLogin = async ({setErrors, setStatus,provider}) => {
+    const socialLogin = async ({setErrors,provider}) => {
         await csrf()
 
         setErrors([])
-        setStatus(null)
-
-        axios
-            .get(`/auth/${provider}/redirect`)
-            .then(() => {
-                mutate();
-              router.push('/dashboard');
-            })
-            .catch(error => {
-                if (error.response.status !== 422) throw error
-
-                setErrors(error.response.data.errors)
-    })
+        window.location.href = `http://localhost:8000/auth/${provider}/redirect`;
 }
 
     const login = async ({ setErrors, setStatus, ...props }) => {
@@ -115,7 +103,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             await axios.post('/logout').then(() => mutate())
         }
 
-        window.location.pathname = '/login'
+        window.location.pathname = '/users'
     }
 
     useEffect(() => {

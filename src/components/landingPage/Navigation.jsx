@@ -1,20 +1,30 @@
 import React, { useState } from 'react';
-import { Gamepad2, Menu, X } from 'lucide-react';
+import { Dice6, Menu, X } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
+import {useRouter} from 'next/navigation';
+import { useAuth } from '@/hooks/auth';
 
 
 
 export default function Navigation({ isScrolled }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
+  const {user,logout} = useAuth();
+  const router = useRouter();
+  const handleJoinCLick = () => {
+    router.push('/users');
+  } 
+  //TODO add a logout dropdown with a logout button matching the design when user is logged in or user is present
+  const handleLogout = () => {
+    logout();
+  }
   return (
     <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'glass-effect py-2' : 'bg-transparent py-4'}`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Gamepad2 className="w-8 h-8 text-game-primary animate-float" />
+            <Dice6 className="w-9 h-9 text-game-primary animate-float" />
             <span className="text-xl font-bold bg-clip-text bg-gradient-to-r from-game-primary via-game-secondary to-game-accent">
-              GameRealm
+              CASINO PLAY
             </span>
           </div>
           
@@ -33,9 +43,9 @@ export default function Navigation({ isScrolled }) {
                 {isMobileMenuOpen ? <X /> : <Menu />}
               </button>
             </div>
-            <button className="hidden md:block gradient-border bg-gray-900 dark:bg-gray-900 px-6 py-2 font-medium transition-transform hover:scale-105">
+            {user ? (<p>Hello {user?.name}</p>) : ( <button onClick={handleJoinCLick} className="hidden md:block gradient-border bg-gray-900 dark:bg-gray-900 px-6 py-2 font-medium transition-transform hover:scale-105">
               Join Now
-            </button>
+            </button>)}
           </div>
         </div>
 
@@ -47,9 +57,9 @@ export default function Navigation({ isScrolled }) {
               <a href="#games" className="hover:text-game-primary transition-colors">Games</a>
               <a href="#tournaments" className="hover:text-game-primary transition-colors">Tournaments</a>
               <a href="#rules" className="hover:text-game-primary transition-colors">Rules</a>
-              <button className="gradient-border bg-gray-900 dark:bg-gray-900 px-6 py-2 font-medium w-full">
+              {user ? (<p>Hello {user?.name}</p>) : ( <button onClick={handleJoinCLick} className="gradient-border bg-gray-900 dark:bg-gray-900 px-6 py-2 font-medium w-full">
                 Join Now
-              </button>
+              </button>)}
             </div>
           </div>
         )}

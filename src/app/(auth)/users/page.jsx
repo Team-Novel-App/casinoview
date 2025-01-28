@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React,{useState} from 'react';
 import { useAuth } from '@/hooks/auth';
 const SocialLogin = () => {
   const { socialLogin } = useAuth({
