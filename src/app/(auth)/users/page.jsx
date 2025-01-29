@@ -18,7 +18,7 @@ const SocialLogin = () => {
     });
   };
   const router = useRouter();
-    const handleJoinCLick = () => {
+    const homePageNavigation = () => {
       router.push('/');
     } 
   return (
@@ -63,7 +63,7 @@ const SocialLogin = () => {
 
           <button 
             className="group relative w-full h-14 text-white hover:text-black hover:bg-gray-200 border bg-black border-gray-300 hover:border-gray-800 transition-all duration-300 ease-out overflow-hidden rounded-lg transform hover:scale-105"
-            onClick={handleJoinCLick}
+            onClick={homePageNavigation}
           >
             <div className="flex items-center justify-center w-full space-x-3">
               <Home className="w-6 h-6 transition-transform group-hover:scale-110 duration-300" />
