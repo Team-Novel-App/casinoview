@@ -29,7 +29,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-6">
               <Gamepad2 className="w-8 h-8 text-game-primary" />
-              <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-game-primary via-game-secondary to-game-accent">
+              <span className="text-xl  font-bold bg-clip-text bg-gradient-to-r from-game-primary via-game-secondary to-game-accent">
                 GameRealm
               </span>
             </div>
@@ -46,7 +46,7 @@ export default function Footer() {
                 <a
                   key={index}
                   href={social.href}
-                  className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-game-primary transition-colors"
+                  className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-via-game-primary delay-200 ease-in-out duration-150 transition-colors"
                 >
                   <social.icon className="w-5 h-5" />
                 </a>
