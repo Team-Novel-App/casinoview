@@ -1,20 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import {useRouter} from 'next/navigation';
 
 const heroSlides = [
   {
-    image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1509478861672-91e9a2f90c04?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGNhc2lub3xlbnwwfHwwfHx8MA%3D%3D",
     title: "Level Up Your Gaming Experience",
     subtitle: "Join the ultimate gaming community where legends are born. Compete in tournaments, connect with fellow gamers, and embrace victory."
   },
   {
-    image: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1511193311914-0346f16efe90?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Y2FzaW5vfGVufDB8fDB8fHww",
     title: "Compete at the Highest Level",
     subtitle: "Enter tournaments with massive prize pools and prove your worth against the best players worldwide."
   },
   {
-    image: "https://images.unsplash.com/photo-1542751110-97427bbecf20?auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1491644386567-d98960637850?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     title: "Join Our Gaming Community",
+    subtitle: "Connect with millions of players, share your achievements, and make lasting friendships in our vibrant community."
+  },
+  {
+    image: "https://images.unsplash.com/photo-1626775238053-4315516eedc9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2FzaW5vfGVufDB8fDB8fHww",
+    title: "Join Our Gaming ",
     subtitle: "Connect with millions of players, share your achievements, and make lasting friendships in our vibrant community."
   }
 ];
@@ -23,7 +29,10 @@ export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const slideInterval = useRef();
-
+  const router = useRouter();
+  const handleJoinCLick = () => {
+    router.push('/users');
+  } 
   const nextSlide = () => {
     if (!isTransitioning) {
       setIsTransitioning(true);
@@ -89,8 +98,8 @@ export default function HeroSection() {
             {heroSlides[currentSlide].subtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 animate-fade-slide-up-late">
-            <button className="gradient-border bg-gray-900/50 backdrop-blur-sm px-8 py-3 font-medium transition-transform hover:scale-105 flex items-center justify-center gap-2">
-              Get Started <ChevronRight className="w-5 h-5" />
+            <button onClick={handleJoinCLick} className="gradient-border bg-gray-900/50 backdrop-blur-sm px-8 py-3 font-medium transition-transform hover:scale-105 flex items-center justify-center gap-2">
+              Join Now <ChevronRight className="w-5 h-5" />
             </button>
             <button className="border border-game-primary hover:bg-game-primary/10 px-8 py-3 rounded-full font-medium transition backdrop-blur-sm">
               Learn More
