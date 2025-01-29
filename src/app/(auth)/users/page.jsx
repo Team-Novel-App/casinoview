@@ -1,6 +1,7 @@
 'use client';
 
 import React,{useState} from 'react';
+import { Home } from "lucide-react";
 import { useAuth } from '@/hooks/auth';
 const SocialLogin = () => {
   const { socialLogin } = useAuth({
@@ -27,7 +28,7 @@ const SocialLogin = () => {
         </div>
         <div className="space-y-4">
           <button 
-            className="group relative w-full h-14 text-black hover:text-white hover:bg-[#1877F2] border border-[#1877F2]/30 hover:border-[#1877F2] transition-all duration-300 ease-out overflow-hidden rounded-lg"
+            className="group relative w-full h-14 text-black hover:text-white hover:bg-[#1877F2] border border-[#1877F2]/30 hover:border-[#1877F2] transition-all duration-300 ease-out overflow-hidden rounded-lg transform hover:scale-105"
             onClick={() => handleSocialLogin('facebook')}
           >
             <div className="flex items-center justify-center w-full space-x-3">
@@ -39,8 +40,9 @@ const SocialLogin = () => {
               <span className="text-base font-medium">Login/Register using Facebook</span>
             </div>
           </button>
+            
           <button 
-            className="group relative w-full h-14 text-black hover:text-white hover:bg-[#EA4335] border border-[#EA4335]/30 hover:border-[#EA4335] transition-all duration-300 ease-out overflow-hidden rounded-lg"
+            className="group relative w-full h-14 text-black hover:text-white hover:bg-[#EA4335] border border-[#EA4335]/30 hover:border-[#EA4335] transition-all duration-300 ease-out overflow-hidden rounded-lg transform hover:scale-105"
             onClick={() => handleSocialLogin('google')}
           >
             <div className="flex items-center justify-center w-full space-x-3">
@@ -52,6 +54,17 @@ const SocialLogin = () => {
               <span className="text-base font-medium">Login/Register using Gmail</span>
             </div>
           </button>
+
+          <button 
+            className="group relative w-full h-14 text-black hover:text-white hover:bg-gray-800 border border-gray-300 hover:border-gray-800 transition-all duration-300 ease-out overflow-hidden rounded-lg transform hover:scale-105"
+            onClick={() => window.location.href = '/'}
+          >
+            <div className="flex items-center justify-center w-full space-x-3">
+              <Home className="w-6 h-6 transition-transform group-hover:scale-110 duration-300" />
+              <span className="text-base font-medium">Back to Home</span>
+            </div>
+          </button>
+
         </div>
         <p className="mt-8 text-center text-sm text-black">
           By continuing, you agree to our{' '}
