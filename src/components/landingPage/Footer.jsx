@@ -25,7 +25,7 @@ export default function Footer() {
   return (
     <footer className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 py-20">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-4 gap-12">
+        <div className="grid md:grid-cols-4 gap-46 ">
           <div>
             <div className="flex items-center gap-2 mb-6">
               <Gamepad2 className="w-8 h-8 text-game-primary" />
@@ -46,7 +46,7 @@ export default function Footer() {
                 <a
                   key={index}
                   href={social.href}
-                  className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-via-game-primary delay-200 ease-in-out duration-150 transition-colors"
+                  className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center  justify-center hover:bg-[#4f46e5] delay-200 ease-in-out duration-150 transition-colors"
                 >
                   <social.icon className="w-5 h-5" />
                 </a>
