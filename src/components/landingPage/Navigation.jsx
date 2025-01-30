@@ -3,12 +3,9 @@ import { Dice6, Menu, X, LogOut, User, Settings } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/auth";
 import Image from "next/image";
-import { createRouteLoader } from "next/dist/client/route-loader";
-
 export default function Navigation({ isScrolled }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
   const { user, logout } = useAuth();
   const router = useRouter();
 
@@ -20,14 +17,8 @@ export default function Navigation({ isScrolled }) {
     logout();
   };
 
-  useEffect(() => {
-    if (user !== undefined) {
-      setIsLoading(false);
-    }
-  }, [user]);
-
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? "glass-effect py-2" : "bg-transparent py-4"}`}>
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? "glass-effect py-2" : "bg-transparent py-4"}`}>      
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -52,9 +43,7 @@ export default function Navigation({ isScrolled }) {
               </button>
             </div>
 
-            {isLoading ? (
-              <div>Loading...</div>
-            ) : user ? (
+            {user ? (
               <div className="relative">
                 <button onClick={() => setIsProfileOpen(!isProfileOpen)} className="flex items-center space-x-2">
                   <Image src={user?.avatar} alt="User" width={30} height={30} className="rounded-full border" />
