@@ -46,7 +46,7 @@ export default function Footer() {
                 <a
                   key={index}
                   href={social.href}
-                  className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-via-game-primary delay-200 ease-in-out duration-150 transition-colors"
+                  className="w-10 h-10 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center hover:bg-[#4f46e5] delay-200 ease-in-out duration-150 transition-colors"
                 >
                   <social.icon className="w-5 h-5" />
                 </a>
