@@ -3,6 +3,7 @@ import { Dice6, Menu, X, LogOut, User, Settings } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/auth";
 import Image from "next/image";
+import { createRouteLoader } from "next/dist/client/route-loader";
 
 export default function Navigation({ isScrolled }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
