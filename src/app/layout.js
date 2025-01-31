@@ -1,21 +1,24 @@
-import { Nunito } from 'next/font/google'
-import '@/app/global.css'
-
+import { Nunito } from 'next/font/google';
+import '@/app/global.css';
+import AOSProvider from '@/components/AOSProvider';
 const nunitoFont = Nunito({
     subsets: ['latin'],
     display: 'swap',
-})
+});
+
+export const metadata = {
+    title: 'Laravel',
+};
 
 const RootLayout = ({ children }) => {
     return (
         <html lang="en" className={nunitoFont.className}>
-            <body className="antialiased">{children}</body>
+            <body className="antialiased">
+                <AOSProvider />
+                {children}
+            </body>
         </html>
-    )
-}
+    );
+};
 
-export const metadata = {
-    title: 'Laravel',
-}
-
-export default RootLayout
+export default RootLayout;
