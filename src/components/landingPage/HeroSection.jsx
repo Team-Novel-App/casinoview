@@ -85,13 +85,13 @@ export default function HeroSection() {
         <div className="max-w-3xl animate-fade-in">
           <h1 className="text-5xl md:text-7xl font-retro-signed leading-tight mb-6 animate-slide-up">
               <span
-                className="inline-block animate-word-slide-up bg-clip-text bg-gradient-to-r from-[#a11111] to-[#df632a] text-transparent"
+                className="inline-block animate-word-slide-up "
                 style={{ animationDelay: 0.5 }}
               >
                 {heroSlides[currentSlide].title}
               </span>
           </h1>
-          <p className="text-lg mb-8 max-w-xl bg-clip-text bg-gradient-to-r from-[#a11111] to-[#df632a] text-transparent animate-fade-slide-up">
+          <p className="text-lg mb-8 max-w-xl animate-fade-slide-up">
             {heroSlides[currentSlide].subtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 animate-fade-slide-up-late">
