@@ -22,18 +22,18 @@ export default function Navigation({ isScrolled }) {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Dice6 className="w-9 h-9 text-game-primary animate-float" />
-            <span className="text-xl font-bold bg-clip-text bg-gradient-to-r from-game-primary via-game-secondary to-game-accent">
+            <Dice6 className="w-9 h-9 text-[#4f46e5] animate-float" />
+            <span className="text-xl font-bold bg-clip-text bg-gradient-to-r from-[#4f46e5] via-[#7c3aed] to-[#db2777] text-transparent">
               CASINO PLAY
             </span>
           </div>
 
           <div className="hidden md:flex items-center gap-8">
-            <a href="#home" className="hover:text-game-primary transition-colors">Home</a>
-            <a href="#features" className="hover:text-game-primary transition-colors">Features</a>
-            <a href="#games" className="hover:text-game-primary transition-colors">Games</a>
-            <a href="#tournaments" className="hover:text-game-primary transition-colors">Tournaments</a>
-            <a href="#rules" className="hover:text-game-primary transition-colors">Rules</a>
+            <a href="#home" className="hover:text-[#4f46e5] transition-colors">Home</a>
+            <a href="#features" className="hover:text-[#4f46e5] transition-colors">Features</a>
+            <a href="#games" className="hover:text-[#4f46e5] transition-colors">Games</a>
+            <a href="#tournaments" className="hover:text-[#4f46e5] transition-colors">Tournaments</a>
+            <a href="#rules" className="hover:text-[#4f46e5] transition-colors">Rules</a>
           </div>
 
           <div className="flex items-center gap-4">
