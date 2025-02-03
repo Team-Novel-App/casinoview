@@ -9,6 +9,7 @@ import RulesSection from '@/components/landingPage/RulesSection';
 import Footer from '@/components/landingPage/Footer';
 import ChatPopup from '@/components/landingPage/ChatPopup';
 import WhyChooseUS from '@/components/landingPage/WhyChooseUs';
+import FAQSection from '../components/landingPage/FAQSection';
 import MarqueeText from '@/components/landingPage/MarqueeText';
 // import LoginLinks from '@/app/LoginLinks'
 // export const metadata = {
@@ -37,6 +38,7 @@ function Home() {
       <MarqueeText />
       <RulesSection />
       <WhyChooseUS />
+      <FAQSection/>
       <Footer />
       <ChatPopup />
     </div>
