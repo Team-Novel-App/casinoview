@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+/src/app/casinoserver.code-workspace
+/casinoserver.code-workspace
+
 # testing
 /coverage
 
