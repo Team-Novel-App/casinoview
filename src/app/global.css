@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: 'RetroSigned';
-  src: url('../../public/fonts/RetroSigned-DYYY0.ttf') format('truetype');
+  font-family:'CoffeeInitials';
+  src: url('../../public/assets/fonts/CoffeetinInitials-YXJ2.ttf') format('truetype');
   font-weight: bolder;
   font-style: normal;
 }
 .font-retro-signed {
-  font-family: 'RetroSigned', sans-serif;
+  font-family: 'CoffeeInitials', sans-serif;
 }
 
 @keyframes float {

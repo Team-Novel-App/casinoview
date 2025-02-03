@@ -4,7 +4,6 @@ module.exports = {
         extend: {
             fontFamily: {
               sans: ['Inter', 'system-ui', 'sans-serif'],
-              titleFont: ['Poppins', 'sans-serif'],
             },
             colors: {
               'game-primary': '#4f46e5',
