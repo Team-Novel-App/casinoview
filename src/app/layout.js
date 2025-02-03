@@ -7,7 +7,7 @@ const nunitoFont = Nunito({
 });
 
 export const metadata = {
-    title: 'Laravel',
+    title: 'CASINO PLAY',
 };
 
 const RootLayout = ({ children }) => {

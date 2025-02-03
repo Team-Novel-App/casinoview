@@ -1,6 +1,6 @@
 
 export const metadata = {
-    title: 'Laravel',
+    title: 'CASINO PLAY AUTH',
 }
 
 const Layout = ({ children }) => {
