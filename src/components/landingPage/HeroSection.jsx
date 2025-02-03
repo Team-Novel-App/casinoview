@@ -83,11 +83,11 @@ export default function HeroSection() {
 
       <div className="relative z-20 h-full container mx-auto px-4 flex items-center">
         <div className="max-w-3xl animate-fade-in">
-          <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-6 animate-slide-up">
+          <h1 className="text-5xl md:text-7xl bg-amber-200 font-retro-signed leading-tight mb-6 animate-slide-up">
             {heroSlides[currentSlide].title.split(' ').map((word, i) => (
               <span
                 key={i}
-                className="inline-block animate-word-slide-up"
+                className="inline-block animate-word-slide-up bg-clip-text bg-gradient-to-r from-[#4f46e5] via-[#7c3aed] to-[#db2777] text-transparent"
                 style={{ animationDelay: `${i * 0.1}s` }}
               >
                 {word}{' '}

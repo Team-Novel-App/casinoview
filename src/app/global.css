@@ -1,4 +1,15 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: 'RetroSigned';
+  src: url('../../public/fonts/RetroSigned-DYYY0.ttf') format('truetype');
+  font-weight: bolder;
+  font-style: normal;
+}
+.font-retro-signed {
+  font-family: 'RetroSigned', sans-serif;
+}
+
 @keyframes float {
     0%, 100% {
       transform: translateY(0);
