@@ -11,6 +11,7 @@ import ChatPopup from '@/components/landingPage/ChatPopup';
 import WhyChooseUS from '@/components/landingPage/WhyChooseUs';
 import FAQSection from '../components/landingPage/FAQSection';
 import MarqueeText from '@/components/landingPage/MarqueeText';
+import  AboutUs  from '@/components/landingPage/AboutUs';
 // import LoginLinks from '@/app/LoginLinks'
 // export const metadata = {
 //     title: 'Laravel',
@@ -34,6 +35,7 @@ function Home() {
       <HeroSection />
       <FeaturesSection />
       <GamesSection />
+      <AboutUs />
       <TournamentsSection />
       <MarqueeText />
       <RulesSection />
