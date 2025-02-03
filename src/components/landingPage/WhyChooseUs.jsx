@@ -1,26 +1,28 @@
-import { Shield, Dice1Icon as Dice, Trophy, Coins } from "lucide-react"
+"use client";
+import { useState, useEffect } from "react";
+import Lottie from "lottie-react";
 
 const features = [
   { 
-    Icon: Shield, 
+    animation: "/Lottie/secure.json", 
     title: "Secure & Fair Gaming",
     description: "Advanced encryption and certified RNG technology ensure your gaming experience is both safe and fair.",
     aos: "fade-left"
   },
   { 
-    Icon: Dice, 
+    animation: "/Lottie/premium.json", 
     title: "Premium Game Selection",
     description: "Access hundreds of high-quality casino games from top providers, updated regularly with new releases.",
     aos: "fade-left"
   },
   { 
-    Icon: Trophy, 
+    animation: "/Lottie/winner.json", 
     title: "Competitive Rewards",
     description: "Enjoy industry-leading winning rates and exclusive bonus programs designed to maximize your chances.",
     aos: "fade-left"
   },
   { 
-    Icon: Coins, 
+    animation: "/Lottie/reward.json", 
     title: "Smart Investment Gaming",
     description: "Strategic gaming options with real earning potential through our innovative reward systems.",
     aos: "fade-left"
@@ -28,6 +30,25 @@ const features = [
 ];
 
 export default function WhyChooseUs() {
+  const [animationData, setAnimationData] = useState({});
+
+  useEffect(() => {
+    const loadAnimations = async () => {
+      const data = {};
+      for (const feature of features) {
+        try {
+          const response = await fetch(feature.animation);
+          if (!response.ok) throw new Error(`Failed to load ${feature.animation}`);
+          data[feature.animation] = await response.json();
+        } catch (error) {
+          console.error(error);
+        }
+      }
+      setAnimationData(data);
+    };
+    loadAnimations();
+  }, []);
+
   return (
     <section className="bg-[#151C28] h-auto text-white p-1 sm:p-4 lg:p-30 relative overflow-hidden">
       <div className="absolute inset-0 opacity-10">
@@ -63,25 +84,23 @@ export default function WhyChooseUs() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-10">
-            {features.map(({ Icon, title, description, aos }, index) => (
+            {features.map(({ animation, title, description, aos }, index) => (
               <div 
                 key={index} 
                 className="space-y-4 last:mb-8"
                 data-aos={aos}
                 data-aos-delay={index * 200}
               >
-                <div className="w-16 h-16 bg-green-400 rounded-full flex items-center justify-center shadow-lg shadow-green-400/50">
-                  <Icon className="w-8 h-8 text-white" />
+                <div className="w-20 h-20 flex items-center justify-center">
+                  {animationData[animation] && <Lottie animationData={animationData[animation]} loop={true} />}
                 </div>
                 <h3 className="text-xl font-semibold">{title}</h3>
-                <p className="text-gray-400">
-                  {description}
-                </p>
+                <p className="text-gray-400">{description}</p>
               </div>
             ))}
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
