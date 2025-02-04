@@ -73,13 +73,30 @@ export default function GamesSection() {
   return (
     <section id="games" className="py-32 bg-gray-100 dark:bg-gray-800/20">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">Featured Games</h2>
-        <p className="text-gray-400 text-center mb-16 max-w-2xl mx-auto">
+        <h2 
+          data-aos="fade-down"
+          data-aos-duration="1000"
+          className="text-4xl md:text-5xl font-bold text-center mb-4"
+        >
+          Featured Games
+        </h2>
+        <p 
+          data-aos="fade-down"
+          data-aos-duration="1000"
+          data-aos-delay="200"
+          className="text-gray-400 text-center mb-16 max-w-2xl mx-auto"
+        >
           Dive into our selection of popular competitive games and start your journey to the top.
         </p>
         <div className="grid md:grid-cols-4 gap-6">
           {games.map((game, index) => (
-            <div key={index} className="group relative overflow-hidden rounded-lg gradient-border">
+            <div 
+              key={index} 
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay={100 * (index + 1)}
+              className="group relative overflow-hidden rounded-lg gradient-border"
+            >
               <div className="absolute inset-0 bg-gradient-to-r from-game-primary/20 via-game-secondary/20 to-game-accent/20 opacity-0 group-hover:opacity-100 transition-opacity z-10"></div>
               <img 
                 src={game.image}
