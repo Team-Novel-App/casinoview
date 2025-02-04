@@ -1,6 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
-import Lottie from "lottie-react";
+import dynamic from 'next/dynamic';
+
+const LottieComponent = dynamic(() => import('lottie-react'), {
+  loading: () => <div className="w-20 h-20"></div>,
+  ssr: false
+});
 
 const features = [
   { 
@@ -31,27 +36,37 @@ const features = [
 
 export default function WhyChooseUs() {
   const [animationData, setAnimationData] = useState({});
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    setIsClient(true);
+
     const loadAnimations = async () => {
       const data = {};
-      for (const feature of features) {
+      
+      // Use Promise.all for parallel loading
+      const animationPromises = features.map(async (feature) => {
         try {
           const response = await fetch(feature.animation);
           if (!response.ok) throw new Error(`Failed to load ${feature.animation}`);
           data[feature.animation] = await response.json();
         } catch (error) {
-          console.error(error);
+          console.error(`Error loading animation ${feature.animation}:`, error);
+          // Fallback to a default or skip
+          data[feature.animation] = null;
         }
-      }
+      });
+
+      await Promise.all(animationPromises);
       setAnimationData(data);
     };
+
     loadAnimations();
   }, []);
 
   return (
     <section className="bg-[#151C28] h-auto text-white p-1 sm:p-4 lg:p-30 relative overflow-hidden">
-      <div className="absolute inset-0 opacity-10">
+      <div className="absolute inset-0 opacity-10 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 text-6xl sm:text-5xl">♠</div>
         <div className="absolute top-1/2 right-1/4 text-6xl sm:text-5xl">♥</div>
         <div className="absolute bottom-1/4 left-1/3 text-6xl sm:text-5xl">♦</div>
@@ -84,20 +99,32 @@ export default function WhyChooseUs() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-10">
-            {features.map(({ animation, title, description, aos }, index) => (
-              <div 
-                key={index} 
-                className="space-y-4 last:mb-8"
-                data-aos={aos}
-                data-aos-delay={index * 200}
-              >
-                <div className="w-20 h-20 flex items-center justify-center">
-                  {animationData[animation] && <Lottie animationData={animationData[animation]} loop={true} />}
+            {isClient && features.map(({ animation, title, description, aos }, index) => {
+              const currentAnimationData = animationData[animation];
+              
+              return (
+                <div 
+                  key={index} 
+                  className="space-y-4 last:mb-8"
+                  data-aos={aos}
+                  data-aos-delay={index * 200}
+                >
+                  <div className="w-20 h-20 flex items-center justify-center">
+                    {currentAnimationData ? (
+                      <LottieComponent 
+                        animationData={currentAnimationData} 
+                        loop={true} 
+                        aria-label={`${title} animation`}
+                      />
+                    ) : (
+                      <div className="w-20 h-20 bg-gray-800 rounded-full animate-pulse"></div>
+                    )}
+                  </div>
+                  <h3 className="text-xl font-semibold">{title}</h3>
+                  <p className="text-gray-400">{description}</p>
                 </div>
-                <h3 className="text-xl font-semibold">{title}</h3>
-                <p className="text-gray-400">{description}</p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
