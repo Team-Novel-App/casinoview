@@ -4,7 +4,7 @@ import Navigation from '@/components/landingPage/Navigation';
 import HeroSection from '@/components/landingPage/HeroSection';
 import FeaturesSection from '@/components/landingPage/FeatureSection';
 import GamesSection from '@/components/landingPage/GamesSection';
-import TournamentsSection from '@/components/landingPage/TournamentsSection';
+import EventsSection from '@/components/landingPage/EventsSection';
 import RulesSection from '@/components/landingPage/RulesSection';
 import Footer from '@/components/landingPage/Footer';
 import ChatPopup from '@/components/landingPage/ChatPopup';
@@ -36,7 +36,7 @@ function Home() {
       <FeaturesSection />
       <GamesSection />
       <AboutUs />
-      <TournamentsSection />
+      <EventsSection />
       <MarqueeText />
       <RulesSection />
       <WhyChooseUS />
