@@ -4,13 +4,14 @@ import Navigation from '@/components/landingPage/Navigation';
 import HeroSection from '@/components/landingPage/HeroSection';
 import FeaturesSection from '@/components/landingPage/FeatureSection';
 import GamesSection from '@/components/landingPage/GamesSection';
-import TournamentsSection from '@/components/landingPage/TournamentsSection';
+import EventsSection from '@/components/landingPage/EventsSection';
 import RulesSection from '@/components/landingPage/RulesSection';
 import Footer from '@/components/landingPage/Footer';
 import ChatPopup from '@/components/landingPage/ChatPopup';
 import WhyChooseUS from '@/components/landingPage/WhyChooseUs';
 import FAQSection from '../components/landingPage/FAQSection';
 import MarqueeText from '@/components/landingPage/MarqueeText';
+import  AboutUs  from '@/components/landingPage/AboutUs';
 // import LoginLinks from '@/app/LoginLinks'
 // export const metadata = {
 //     title: 'Laravel',
@@ -34,7 +35,8 @@ function Home() {
       <HeroSection />
       <FeaturesSection />
       <GamesSection />
-      <TournamentsSection />
+      <AboutUs />
+      <EventsSection />
       <MarqueeText />
       <RulesSection />
       <WhyChooseUS />

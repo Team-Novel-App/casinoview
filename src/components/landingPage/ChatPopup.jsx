@@ -133,7 +133,7 @@ function ChatPopup() {
                     <div
                       className={`max-w-[80%] rounded-lg p-3 ${
                         msg.sender === 'User'
-                          ? 'bg-game-primary text-white'
+                          ? 'bg-[#4f46e5] text-white'
                           : 'bg-gray-800 text-gray-100'
                       }`}
                     >
@@ -160,8 +160,8 @@ function ChatPopup() {
                 ))}
                 <div ref={messagesEndRef} />
                 {isDraggingFile && (
-                  <div className="absolute inset-0 bg-game-primary/10 border-2 border-dashed border-game-primary rounded-lg flex items-center justify-center">
-                    <p className="text-game-primary font-medium">Drop files to attach</p>
+                  <div className="absolute inset-0 bg-game-primary/10 border-2 border-dashed border-[#4f46e5] rounded-lg flex items-center justify-center">
+                    <p className="text-[#4f46e5] font-medium">Drop files to attach</p>
                   </div>
                 )}
               </div>
@@ -181,7 +181,7 @@ function ChatPopup() {
                   />
                   <button
                     onClick={handleSendMessage}
-                    className="text-white bg-game-primary hover:bg-game-secondary p-2 rounded-lg transition-colors"
+                    className="text-white bg-[#4f46e5] hover:bg-[#7c3aed] p-2 rounded-lg transition-colors"
                   >
                     <Send className="w-5 h-5" />
                   </button>
