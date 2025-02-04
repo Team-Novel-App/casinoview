@@ -28,6 +28,8 @@ const heroSlides = [
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [activeContent, setActiveContent] = useState(0);
+  const [imagesLoaded, setImagesLoaded] = useState({});
   const slideInterval = useRef();
   const router = useRouter();
   const handleJoinCLick = () => {
@@ -48,7 +50,7 @@ export default function HeroSection() {
   };
 
   useEffect(() => {
-    slideInterval.current = setInterval(nextSlide, 5000);
+    slideInterval.current = setInterval(nextSlide, 10000);
     return () => {
       if (slideInterval.current) {
         clearInterval(slideInterval.current);
@@ -56,8 +58,20 @@ export default function HeroSection() {
     };
   }, []);
 
+  const handleImageLoad = (index) => {
+    setImagesLoaded(prev => ({
+      ...prev,
+      [index]: true
+    }));
+  };
+
   const handleTransitionEnd = () => {
-    setIsTransitioning(false);
+    if (imagesLoaded[currentSlide]) {
+      setActiveContent(currentSlide);
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 100);
+    }
   };
 
   return (
@@ -66,8 +80,10 @@ export default function HeroSection() {
         {heroSlides.map((slide, index) => (
           <div
             key={index}
-            className={`absolute inset-0 transition-opacity duration-1000 ${
-              currentSlide === index ? 'opacity-100' : 'opacity-0'
+            className={`absolute inset-0 transition-all duration-[3000ms] ease-in-out ${
+              currentSlide === index 
+                ? 'opacity-100 z-10' 
+                : 'opacity-0 z-0'
             }`}
             onTransitionEnd={handleTransitionEnd}
           >
@@ -75,24 +91,26 @@ export default function HeroSection() {
             <img
               src={slide.image}
               alt={`Slide ${index + 1}`}
-              className="absolute inset-0 w-full h-full object-cover object-center transform scale-110 transition-transform duration-10000 ease-out animate-slow-zoom"
+              className="absolute inset-0 w-full h-full object-cover object-center"
+              onLoad={() => handleImageLoad(index)}
             />
           </div>
         ))}
       </div>
 
       <div className="relative z-20 h-full container mx-auto px-4 flex items-center">
-        <div className="max-w-3xl animate-fade-in">
-          <h1 className="text-5xl md:text-7xl font-retro-signed leading-tight mb-6 animate-slide-up">
-              <span
-                className="inline-block animate-word-slide-up "
-                style={{ animationDelay: 0.5 }}
-              >
-                {heroSlides[currentSlide].title}
-              </span>
+        <div className="max-w-3xl">
+          <h1 className="text-5xl md:text-7xl font-retro-signed leading-tight mb-6">
+            <span className={`inline-block transition-opacity duration-[2000ms] ${
+              isTransitioning ? 'opacity-0' : 'opacity-100'
+            }`}>
+              {heroSlides[activeContent].title}
+            </span>
           </h1>
-          <p className="text-lg mb-8 max-w-xl animate-fade-slide-up">
-            {heroSlides[currentSlide].subtitle}
+          <p className={`text-lg mb-8 max-w-xl transition-opacity duration-[2000ms] ${
+            isTransitioning ? 'opacity-0' : 'opacity-100'
+          }`}>
+            {heroSlides[activeContent].subtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 animate-fade-slide-up-late">
             <button onClick={handleJoinCLick} className="gradient-border bg-gray-900/50 backdrop-blur-sm px-8 py-3 font-medium transition-transform hover:scale-105 flex items-center justify-center gap-2">
