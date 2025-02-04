@@ -1,14 +1,14 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { motion, useAnimation } from 'framer-motion'
 
 const Marquee = () => {
   const controls = useAnimation()
   const [width, setWidth] = useState(0)
+  const isAnimating = useRef(false)
 
   useEffect(() => {
-    // Calculate total width based on viewport
     const calculateWidth = () => {
       const viewportWidth = window.innerWidth
       setWidth(viewportWidth)
@@ -22,20 +22,36 @@ const Marquee = () => {
 
   useEffect(() => {
     const animate = async () => {
-      while (true) {
-        await controls.start({
-          x: -width,
-          transition: {
-            duration: 20,
-            ease: 'linear',
-          },
-        })
-        await controls.set({ x: 0 })
+      if (isAnimating.current) return
+      isAnimating.current = true
+
+      while (isAnimating.current) {
+        try {
+          await controls.start({
+            x: -width,
+            transition: {
+              duration: 20,
+              ease: 'linear',
+            },
+          })
+          await controls.start({
+            x: 0,
+            transition: {
+              duration: 0
+            }
+          })
+        } catch (err) {
+          isAnimating.current = false
+        }
       }
     }
 
     if (width > 0) {
       animate()
+    }
+
+    return () => {
+      isAnimating.current = false
     }
   }, [controls, width])
 
@@ -53,7 +69,6 @@ const Marquee = () => {
           className="flex whitespace-nowrap"
           animate={controls}
         >
-          {/* Duplicate items to create seamless loop */}
           {[...items, ...items].map((item, index) => (
             <h1
               key={index}
