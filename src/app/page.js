@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect} from 'react';
 import Navigation from '@/components/landingPage/Navigation';
 import HeroSection from '@/components/landingPage/HeroSection';
 
@@ -15,15 +15,6 @@ const ChatPopup = React.lazy(() => import('@/components/landingPage/ChatPopup'))
 
 function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
-
-  const Preloader = () => {
-  return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
-    </div>
-  );
-};
-
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
