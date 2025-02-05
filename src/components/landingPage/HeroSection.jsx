@@ -41,7 +41,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section id="home" className="relative h-screen flex flex-col overflow-hidden">
+    <section id="home" className="relative h-screen flex flex-col overflow-hidden bg-gray-900">
       {/* Main Swiper - 85vh to make space for thumbnails */}
       <div className="relative h-[85vh]">
         <Swiper
@@ -72,17 +72,17 @@ export default function HeroSection() {
             </div>
             <div className="relative z-20 h-full container mx-auto px-4 flex items-center">
               <div className="max-w-3xl">
-                <h1 className="text-4xl md:text-6xl font-retro-signed leading-tight mb-6" data-aos="fade-up">
+                <h1 className="text-white text-4xl md:text-6xl font-retro-signed leading-tight mb-6" data-aos="fade-up">
                   {slide.title}
                 </h1>
-                <p className="text-lg mb-8 max-w-xl" data-aos="fade-up" data-aos-delay="500">
+                <p className="text-white text-lg mb-8 max-w-xl" data-aos="fade-up" data-aos-delay="500">
                   {slide.subtitle}
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4" data-aos="fade-up" data-aos-delay="700">
-                  <button className="gradient-border bg-gray-900/50 backdrop-blur-sm px-8 py-3 font-medium transition-transform hover:scale-105 flex items-center justify-center gap-2">
+                  <button className="text-white gradient-border bg-gray-900/50 backdrop-blur-sm px-8 py-3 font-medium transition-transform hover:scale-105 flex items-center justify-center gap-2">
                     Join Now <ChevronRight className="w-5 h-5" />
                   </button>
-                  <button className="border border-game-primary hover:bg-game-primary/10 px-8 py-3 rounded-full font-medium transition backdrop-blur-sm">
+                  <button className="text-white border border-game-primary hover:bg-game-primary/10 px-8 py-3 rounded-full font-medium transition backdrop-blur-sm">
                     Learn More
                   </button>
                 </div>
