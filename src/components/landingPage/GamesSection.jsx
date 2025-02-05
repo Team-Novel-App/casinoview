@@ -71,12 +71,12 @@ export default function GamesSection() {
   };
 
   return (
-    <section id="games" className="py-32 bg-gray-100 dark:bg-gray-800/20">
+    <section id="games" className="py-32 bg-gray-900">
       <div className="container mx-auto px-4">
         <h2 
           data-aos="fade-down"
           data-aos-duration="1000"
-          className="text-4xl md:text-5xl font-bold text-center mb-4"
+          className="text-white text-4xl md:text-5xl font-bold text-center mb-4"
         >
           Featured Games
         </h2>

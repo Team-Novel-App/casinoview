@@ -20,11 +20,11 @@ const events = [
 
 export default function EventsSection() {
   return (
-    <section id="tournaments" className="py-32 bg-white dark:bg-transparent">
+    <section id="tournaments" className="py-32 bg-gray-900">
       <div className="container mx-auto px-4">
         <h2 
           data-aos="fade-down"
-          className="text-4xl md:text-5xl font-bold text-center mb-4"
+          className="text-white text-4xl md:text-5xl font-bold text-center mb-4"
         >
           Upcoming Events
         </h2>

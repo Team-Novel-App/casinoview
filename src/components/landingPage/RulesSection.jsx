@@ -34,18 +34,18 @@ const rules = [
 
 export default function RulesSection() {
   return (
-    <section id="rules" className="py-32 bg-white/5 dark:bg-gray-800/20">
+    <section id="rules" className="py-32 bg-gray-900">
       <div className="container mx-auto px-4">
         <h2 
           data-aos="fade-down"
-          className="text-4xl md:text-5xl font-bold text-center mb-4 text-gray-900 dark:text-white"
+          className="text-4xl md:text-5xl font-bold text-center mb-4 text-white"
         >
           Community Rules
         </h2>
         <p 
           data-aos="fade-down"
           data-aos-delay="100"
-          className="text-gray-600 dark:text-gray-400 text-center mb-16 max-w-2xl mx-auto"
+          className="text-gray-400 text-center mb-16 max-w-2xl mx-auto"
         >
           To maintain a fair and enjoyable gaming environment, all members must follow these essential rules.
         </p>
@@ -57,7 +57,7 @@ export default function RulesSection() {
               data-aos={rule.aos}
               data-aos-delay={index * 200}
             >
-              <div className="bg-white dark:bg-gray-900 p-8 rounded-lg h-full">
+              <div className="bg-gray-900 p-8 rounded-lg h-full">
                 <div className="flex items-start gap-4">
                   <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${
                     rule.type === 'critical' ? 'bg-red-500/10 text-red-500' :
@@ -68,8 +68,8 @@ export default function RulesSection() {
                     <rule.icon className="w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">{rule.title}</h3>
-                    <p className="text-gray-600 dark:text-gray-400">{rule.description}</p>
+                    <h3 className="text-xl font-bold mb-2 text-white">{rule.title}</h3>
+                    <p className="text-gray-400">{rule.description}</p>
                   </div>
                 </div>
               </div>
