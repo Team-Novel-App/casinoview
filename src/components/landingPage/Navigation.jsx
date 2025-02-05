@@ -30,7 +30,6 @@ export default function Navigation({ isScrolled }) {
 
           <div className="hidden md:flex items-center gap-8">
             <a href="#home" className="hover:text-[#4f46e5] transition-colors">Home</a>
-            <a href="#features" className="hover:text-[#4f46e5] transition-colors">Features</a>
             <a href="#games" className="hover:text-[#4f46e5] transition-colors">Games</a>
             <a href="#tournaments" className="hover:text-[#4f46e5] transition-colors">Tournaments</a>
             <a href="#rules" className="hover:text-[#4f46e5] transition-colors">Rules</a>
@@ -90,7 +89,6 @@ export default function Navigation({ isScrolled }) {
           <div className="md:hidden glass-effect mt-4 p-4 rounded-lg">
             <div className="flex flex-col gap-4">
               <a href="#home" className="hover:text-game-primary transition-colors">Home</a>
-              <a href="#features" className="hover:text-game-primary transition-colors">Features</a>
               <a href="#games" className="hover:text-game-primary transition-colors">Games</a>
               <a href="#tournaments" className="hover:text-game-primary transition-colors">Tournaments</a>
               <a href="#rules" className="hover:text-game-primary transition-colors">Rules</a>
