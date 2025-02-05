@@ -24,7 +24,7 @@ function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white font-sans">
+    <div className="min-h-screen max-w-screen overflow-hidden bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white font-sans">
       <Navigation isScrolled={isScrolled} />
       <HeroSection />    
       <GamesSection />
