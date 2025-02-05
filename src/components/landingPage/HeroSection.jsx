@@ -60,47 +60,37 @@ export default function HeroSection() {
           className="h-full"
         >
           {heroSlides.map((slide, index) => (
-            <SwiperSlide key={index}>
-              <div className="absolute inset-0">
-                <div className="absolute inset-0 bg-gradient-to-r from-gray-900/90 to-gray-900/50 z-10" />
-                <img
-                  src={slide.image}
-                  alt={`Slide ${index + 1}`}
-                  className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 ease-in-out scale-105"
-                />
-              </div>
-              <div className="relative z-20 h-full container mx-auto px-4 flex items-center">
-                <div className="max-w-3xl">
-                  {/* AOS Animation Applied to Title and Subtitle */}
-                  <h1 
-                    className="text-5xl md:text-7xl font-retro-signed leading-tight mb-6"
-                    data-aos="fade-up"
-                    data-aos-delay="300"
-                  >
-                    {slide.title}
-                  </h1>
-                  <p 
-                    className="text-lg mb-8 max-w-xl"
-                    data-aos="fade-up"
-                    data-aos-delay="500"
-                  >
-                    {slide.subtitle}
-                  </p>
-                  <div 
-                    className="flex flex-col sm:flex-row gap-4"
-                    data-aos="fade-up"
-                    data-aos-delay="700"
-                  >
-                    <button className="gradient-border bg-gray-900/50 backdrop-blur-sm px-8 py-3 font-medium transition-transform hover:scale-105 flex items-center justify-center gap-2">
-                      Join Now <ChevronRight className="w-5 h-5" />
-                    </button>
-                    <button className="border border-game-primary hover:bg-game-primary/10 px-8 py-3 rounded-full font-medium transition backdrop-blur-sm">
-                      Learn More
-                    </button>
-                  </div>
+          <SwiperSlide key={index}>
+          <div className="relative w-full h-full min-h-[60vh] sm:min-h-[85vh]">
+            <div className="absolute inset-0">
+              <div className="absolute inset-0 bg-gradient-to-r from-gray-900/90 to-gray-900/50 z-10" />
+              <img
+                src={slide.image}
+                alt={`Slide ${index + 1}`}
+                className="w-full h-full object-cover object-center"
+              />
+            </div>
+            <div className="relative z-20 h-full container mx-auto px-4 flex items-center">
+              <div className="max-w-3xl">
+                <h1 className="text-4xl md:text-6xl font-retro-signed leading-tight mb-6" data-aos="fade-up">
+                  {slide.title}
+                </h1>
+                <p className="text-lg mb-8 max-w-xl" data-aos="fade-up" data-aos-delay="500">
+                  {slide.subtitle}
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4" data-aos="fade-up" data-aos-delay="700">
+                  <button className="gradient-border bg-gray-900/50 backdrop-blur-sm px-8 py-3 font-medium transition-transform hover:scale-105 flex items-center justify-center gap-2">
+                    Join Now <ChevronRight className="w-5 h-5" />
+                  </button>
+                  <button className="border border-game-primary hover:bg-game-primary/10 px-8 py-3 rounded-full font-medium transition backdrop-blur-sm">
+                    Learn More
+                  </button>
                 </div>
               </div>
-            </SwiperSlide>
+            </div>
+          </div>
+        </SwiperSlide>
+        
           ))}
         </Swiper>
       </div>
