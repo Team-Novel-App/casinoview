@@ -18,7 +18,7 @@ export default function Navigation({ isScrolled }) {
   };
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? "glass-effect py-2" : "bg-transparent py-4"}`}>      
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? "glass-effect opacity-80 py-5" : "bg-transparent py-5"}`}>      
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
