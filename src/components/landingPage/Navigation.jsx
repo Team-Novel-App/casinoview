@@ -31,7 +31,7 @@ export default function Navigation({ isScrolled }) {
           <div className="hidden md:flex items-center gap-8">
             <a href="#home" className="hover:text-[#4f46e5] text-white">Home</a>
             <a href="#games" className="hover:text-[#4f46e5] text-white">Games</a>
-            <a href="#tournaments" className="hover:text-[#4f46e5] text-white">Tournaments</a>
+            <a href="#tournaments" className="hover:text-[#4f46e5] text-white">Events</a>
             <a href="#rules" className="hover:text-[#4f46e5] text-white">Rules</a>
           </div>
 
@@ -90,7 +90,7 @@ export default function Navigation({ isScrolled }) {
             <div className="flex flex-col gap-4">
               <a href="#home" className="hover:text-game-primary text-white">Home</a>
               <a href="#games" className="hover:text-game-primary text-white">Games</a>
-              <a href="#tournaments" className="hover:text-game-primary text-white">Tournaments</a>
+              <a href="#tournaments" className="hover:text-game-primary text-white">Events</a>
               <a href="#rules" className="hover:text-game-primary text-white">Rules</a>
               {user ? (
                 <div className="flex flex-col gap-2">
