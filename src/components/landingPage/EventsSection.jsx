@@ -1,66 +1,59 @@
-import React from 'react';
-import { Crown } from 'lucide-react';
+import React from "react";
+import { Gift, Send } from "lucide-react";
 
-const events = [
+const bonusCards = [
   {
-    title: "Apex Legends Championship",
-    prize: "$10,000",
-    date: "March 15, 2024",
-    participants: "128 Teams",
-    gradient: "from-blue-500 to-purple-500"
+    title: "Refer & Earn",
+    description: "Invite your friends and earn exclusive rewards for each successful referral!",
+    buttonText: "Refer Now",
+    icon: <Send className="w-6 h-6 text-white" />,
+    gradient: "from-green-400 to-blue-500",
+    btnGradient: "from-green-500 to-blue-600",
   },
   {
-    title: "Valorant Masters",
-    prize: "$15,000",
-    date: "March 20, 2024",
-    participants: "64 Teams",
-    gradient: "from-purple-500 to-pink-500"
-  }
+    title: "Upcoming Bonuses",
+    description: "Stay tuned for exciting rewards and exclusive bonus opportunities!",
+    buttonText: "View Bonuses",
+    icon: <Gift className="w-6 h-6 text-white" />,
+    gradient: "from-purple-500 to-pink-500",
+    btnGradient: "from-purple-500 to-pink-600",
+  },
 ];
 
-export default function EventsSection() {
+export default function EventSection() {
   return (
-    <section id="tournaments" className="py-32 bg-gray-900">
-      <div className="container mx-auto px-4">
-        <h2 
-          data-aos="fade-down"
-          className="text-white text-4xl md:text-5xl font-bold text-center mb-4"
-        >
-          Upcoming Events
+    <section id="tournaments" className="py-26 bg-gray-900">
+      <div className="container mx-auto px-4 text-center">
+        <h2 className="text-white text-4xl md:text-5xl font-bold mb-4" data-aos="fade-down">
+          Earn Rewards & Bonuses
         </h2>
-        <p 
-          data-aos="fade-down"
-          data-aos-delay="100"
-          className="text-gray-400 text-center mb-16 max-w-2xl mx-auto"
-        >
-          Join our competitive tournaments and prove your skills against the best players.
+        <p className="text-gray-400 mb-16 max-w-2xl mx-auto" data-aos="fade-down" data-aos-delay="100">
+          Participate in our referral program and upcoming bonuses to maximize your rewards.
         </p>
-        <div className="grid md:grid-cols-2 gap-8">
-          {events.map((event, index) => (
-            <div 
-              key={index} 
-              className="gradient-border p-1"
+
+        <div className="grid md:grid-cols-2 gap-10">
+          {bonusCards.map((card, index) => (
+            <div
+              key={index}
+              className="relative p-1 rounded-xl shadow-lg transform transition-all hover:scale-105"
               data-aos={index % 2 === 0 ? "fade-right" : "fade-left"}
               data-aos-delay={index * 200}
             >
-              <div className="bg-gray-900 p-8 rounded-lg">
-                <div className="flex items-start justify-between mb-6">
-                  <div>
-                    <h3 className="text-2xl font-bold mb-2">{event.title}</h3>
-                    <p className="text-gray-400">{event.date}</p>
+              <div className="relative bg-gray-800 p-8 rounded-xl border border-gray-700 shadow-md">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className={`w-14 h-14 flex items-center justify-center rounded-lg bg-gradient-to-r ${card.gradient}`}>
+                    {card.icon}
                   </div>
-                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${event.gradient} p-3`}>
-                    <Crown className="w-6 h-6 text-white" />
-                  </div>
+                  <h3 className="text-2xl font-bold text-white">{card.title}</h3>
                 </div>
-                <div className="flex items-center gap-4 text-sm">
-                  <span className="bg-gradient-to-r from-game-primary to-game-secondary text-white px-4 py-2 rounded-full">
-                    Prize: {event.prize}
-                  </span>
-                  <span className="bg-gray-800 px-4 py-2 rounded-full">
-                    {event.participants}
-                  </span>
-                </div>
+
+                <p className="text-gray-400 text-left mb-6">{card.description}</p>
+
+                <button
+                  className={` bg-gradient-to-r ${card.btnGradient} text-white px-6 py-3 rounded-full font-medium transition-all hover:opacity-80 shadow-lg`}
+                >
+                  {card.buttonText}
+                </button>
               </div>
             </div>
           ))}
