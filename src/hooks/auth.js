@@ -44,7 +44,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
         await csrf()
 
         setErrors([])
-        window.location.href = `http://localhost:8000/auth/${provider}/redirect`;
+        window.location.href = `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/${provider}/redirect`;
 }
 
     const login = async ({ setErrors, setStatus, ...props }) => {

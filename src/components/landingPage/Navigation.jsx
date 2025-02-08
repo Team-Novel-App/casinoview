@@ -18,7 +18,7 @@ export default function Navigation({ isScrolled }) {
   };
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? "glass-effect py-2" : "bg-transparent py-4"}`}>      
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? "glass-effect opacity-80 py-5" : "bg-transparent py-5"}`}>      
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -29,16 +29,15 @@ export default function Navigation({ isScrolled }) {
           </div>
 
           <div className="hidden md:flex items-center gap-8">
-            <a href="#home" className="hover:text-[#4f46e5] transition-colors">Home</a>
-            <a href="#features" className="hover:text-[#4f46e5] transition-colors">Features</a>
-            <a href="#games" className="hover:text-[#4f46e5] transition-colors">Games</a>
-            <a href="#tournaments" className="hover:text-[#4f46e5] transition-colors">Tournaments</a>
-            <a href="#rules" className="hover:text-[#4f46e5] transition-colors">Rules</a>
+            <a href="#home" className="hover:text-[#4f46e5] text-white">Home</a>
+            <a href="#games" className="hover:text-[#4f46e5] text-white">Games</a>
+            <a href="#tournaments" className="hover:text-[#4f46e5] text-white">Events</a>
+            <a href="#rules" className="hover:text-[#4f46e5] text-white">Rules</a>
           </div>
 
           <div className="flex items-center gap-4">
             <div className="md:hidden">
-              <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2">
+              <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="text-white p-2">
                 {isMobileMenuOpen ? <X /> : <Menu />}
               </button>
             </div>
@@ -71,7 +70,7 @@ export default function Navigation({ isScrolled }) {
                         <p className="text-xs font-extralight">Settings</p>
                       </div>
                     </div>
-                    <button onClick={handleLogout} className="flex text-xs gap-4 gradient-border bg-gray-900 dark:bg-gray-900 px-6 py-1 font-medium w-full">
+                    <button onClick={handleLogout} className="flex text-xs gap-4 gradient-border bg-gray-900 px-6 py-1 font-medium w-full">
                       <LogOut size={15} />
                       <span>Logout</span>
                     </button>
@@ -79,7 +78,7 @@ export default function Navigation({ isScrolled }) {
                 )}
               </div>
             ) : (
-              <button onClick={handleJoinClick} className="hidden md:block gradient-border bg-gray-900 dark:bg-gray-900 px-6 py-2 font-medium transition-transform hover:scale-105">
+              <button onClick={handleJoinClick} className="text-white hidden md:block gradient-border bg-gray-900 px-6 py-2 font-medium transition-transform hover:scale-105">
                 Join Now
               </button>
             )}
@@ -89,20 +88,19 @@ export default function Navigation({ isScrolled }) {
         {isMobileMenuOpen && (
           <div className="md:hidden glass-effect mt-4 p-4 rounded-lg">
             <div className="flex flex-col gap-4">
-              <a href="#home" className="hover:text-game-primary transition-colors">Home</a>
-              <a href="#features" className="hover:text-game-primary transition-colors">Features</a>
-              <a href="#games" className="hover:text-game-primary transition-colors">Games</a>
-              <a href="#tournaments" className="hover:text-game-primary transition-colors">Tournaments</a>
-              <a href="#rules" className="hover:text-game-primary transition-colors">Rules</a>
+              <a href="#home" className="hover:text-game-primary text-white">Home</a>
+              <a href="#games" className="hover:text-game-primary text-white">Games</a>
+              <a href="#tournaments" className="hover:text-game-primary text-white">Events</a>
+              <a href="#rules" className="hover:text-game-primary text-white">Rules</a>
               {user ? (
                 <div className="flex flex-col gap-2">
                   <p className="text-center font-medium">Hello, {user?.name}</p>
-                  <button onClick={handleLogout} className="w-full font-extralight gradient-border bg-gray-900 dark:bg-gray-900 px-6 py-2">
+                  <button onClick={handleLogout} className="w-full text-white font-extralight gradient-border bg-gray-900  px-6 py-2">
                     Logout
                   </button>
                 </div>
               ) : (
-                <button onClick={handleJoinClick} className="gradient-border bg-gray-900 dark:bg-gray-900 px-6 py-2 font-medium w-full">
+                <button onClick={handleJoinClick} className="text-white gradient-border bg-gray-900  px-6 py-2 font-medium w-full">
                   Join Now
                 </button>
               )}

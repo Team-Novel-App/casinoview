@@ -1,29 +1,21 @@
 'use client';
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect,Suspense} from 'react';
+import dynamic from 'next/dynamic';
 import Navigation from '@/components/landingPage/Navigation';
-import HeroSection from '@/components/landingPage/HeroSection';
-
-const GamesSection = React.lazy(() => import('@/components/landingPage/GamesSection'));
-const EventsSection = React.lazy(() => import('@/components/landingPage/EventsSection'));
-const RulesSection = React.lazy(() => import('@/components/landingPage/RulesSection'));
-const WhyChooseUS = React.lazy(() => import('@/components/landingPage/WhyChooseUs'));
-const FAQSection = React.lazy(() => import('@/components/landingPage/FAQSection'));
-const MarqueeText = React.lazy(() => import('@/components/landingPage/MarqueeText'));
-const AboutUs = React.lazy(() => import('@/components/landingPage/AboutUs'));
-const Footer = React.lazy(() => import('@/components/landingPage/Footer'));
-const ChatPopup = React.lazy(() => import('@/components/landingPage/ChatPopup'));
+import LoadingSpinner from '@/components/common/LoadingSpinner';
+import Footer from '@/components/landingPage/Footer';
+import EventsSection from '@/components/landingPage/EventsSection';
+import RulesSection from '@/components/landingPage/RulesSection';
+import WhyChooseUs from '@/components/landingPage/WhyChooseUs';
+import FAQSection from '@/components/landingPage/FAQSection';
+import MarqueeText from '@/components/landingPage/MarqueeText';
+import AboutUs from '@/components/landingPage/AboutUs';
+const HeroSection =  dynamic(()=>import('@/components/landingPage/HeroSection'),{loading: ()=><LoadingSpinner />,ssr:false});
+const GamesSection = dynamic(() => import('@/components/landingPage/GamesSection'),{loading: ()=><LoadingSpinner />,ssr:false});
+const ChatPopup = dynamic(() => import('@/components/landingPage/ChatPopup'),{loading: ()=><LoadingSpinner />,ssr:false});
 
 function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
-
-  const Preloader = () => {
-  return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
-    </div>
-  );
-};
-
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -33,15 +25,17 @@ function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white font-sans">
+    <div className="min-h-screen max-w-screen overflow-hidden bg-gray-900 text-white font-sans">
       <Navigation isScrolled={isScrolled} />
-      <HeroSection />    
-      <GamesSection />
+      <Suspense fallback={<LoadingSpinner />}>
+         <HeroSection />
+         <GamesSection />
+      </Suspense>    
       <AboutUs />
       <EventsSection />
       <MarqueeText />
       <RulesSection />
-      <WhyChooseUS />
+      <WhyChooseUs />
       <FAQSection />
       <Footer />
       <ChatPopup />

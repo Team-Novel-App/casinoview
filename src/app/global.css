@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family:'CoffeeInitials';
-  src: url('../../public/assets/fonts/CoffeetinInitials-YXJ2.ttf') format('truetype');
+  font-family:'CasinoFont';
+  src: url('../../public/assets/fonts/Casino3DFilledMarqueeRegular.ttf') format('truetype');
   font-weight: bolder;
   font-style: normal;
 }
 .font-retro-signed {
-  font-family: 'CoffeeInitials', sans-serif;
+  font-family: 'CasinoFont', sans-serif;
 }
 
 @keyframes float {
