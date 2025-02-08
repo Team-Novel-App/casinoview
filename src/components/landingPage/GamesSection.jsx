@@ -1,6 +1,8 @@
 "use client"
 import React, { useState, useEffect } from 'react'
 import { ChevronDown, ChevronUp } from 'lucide-react'
+import Image from 'next/image'
+
 
 export default function GamesSection() {
     const [showAll, setShowAll] = useState(false)
@@ -20,62 +22,62 @@ export default function GamesSection() {
     const games = [
         {
             title: 'Apex Legends',
-            image: 'https://i.pinimg.com/736x/76/2b/93/762b935cd60ef95b4ce14ab1c8c30f88.jpg',
+            image: '/assets/images/gameSectionImg/img1.jpg',
             players: '50K+',
         },
         {
             title: 'Valorant',
-            image: 'https://i.pinimg.com/736x/2e/0e/d7/2e0ed7d83502ab38cbbd3b95cbcce6cd.jpg',
+            image: '/assets/images/gameSectionImg/img2.jpg',
             players: '45K+',
         },
         {
             title: 'League of Legends',
-            image: 'https://i.pinimg.com/736x/40/ff/19/40ff199be8ebc229b63c3e9078a02abf.jpg',
+            image: '/assets/images/gameSectionImg/img3.jpg',
             players: '100K+',
         },
         {
             title: 'Hot Deco',
-            image: 'https://amusnet.com/_next/image?url=https%3A%2F%2Fbackend.careers-amusnet.com%2F%2Fsites%2Fdefault%2Ffiles%2Fgames%2FHot_Deco_1920_x_540_px.webp&w=1920&q=75',
+            image: '/assets/images/gameSectionImg/img4.jpg',
             players: '80K+',
         },
         {
             title: 'Game Time',
-            image: 'https://i.pinimg.com/736x/f8/3b/6c/f83b6ce80a4fa63a305d55329a6fcd28.jpg',
+            image: '/assets/images/gameSectionImg/img5.jpg',
             players: '80K+',
         },
         {
             title: 'Poker',
-            image: 'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/casino-poker-games-design-template-69422079995f8294845f054a881649d8_screen.jpg?ts=1698499096',
+            image: '/assets/images/gameSectionImg/img6.jpg',
             players: '80K+',
         },
         {
             title: 'Casino Night',
-            image: 'https://coreldrawdesign.com/resources/previews/preview-vector-vertical-poster-template-for-casino-night-and-gambling-1714994425.jpg',
+            image: '/assets/images/gameSectionImg/img7.jpg',
             players: '80K+',
         },
         {
             title: 'Hot Deco',
-            image: 'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/casino%2C-casino-night%2Cpoker-design-template-300ec225ae8feddb73b0ceabd320e637.jpg?ts=1696319548',
+            image: '/assets/images/gameSectionImg/img8.jpg',
             players: '80K+',
         },
         {
             title: 'Hot Deco',
-            image: 'https://www.shutterstock.com/image-photo/3d-cartoon-title-that-says-260nw-2524957269.jpg',
+            image: '/assets/images/gameSectionImg/img9.jpeg',
             players: '80K+',
         },
         {
             title: 'Hot Deco',
-            image: 'https://c8.alamy.com/comp/KHCKTN/gambling-dice-casino-poster-on-green-KHCKTN.jpg',
+            image: '/assets/images/gameSectionImg/img10.jpg',
             players: '80K+',
         },
         {
             title: 'Hot Deco',
-            image: 'https://roarcdn.fitting-solutions.at/borgata/casino/en/blog/wp-content/uploads/2023/10/10000648/Header_-Rise-of-Olympus-100-1024x1024.jpg?lossy=1&ssl=1',
+            image: '/assets/images/gameSectionImg/img11.jpeg',
             players: '80K+',
         },
         {
             title: 'Hot Deco',
-            image: 'https://high5games.com/wp-content/uploads/2024/02/Homepage_Mobile_88Drums.jpg',
+            image: '/assets/images/gameSectionImg/img12.jpeg',
             players: '80K+',
         },
     ]
@@ -124,11 +126,20 @@ export default function GamesSection() {
                             data-aos-delay={100 * (index + 1)}
                             className="group relative overflow-hidden rounded-lg gradient-border">
                             <div className="absolute inset-0 bg-gradient-to-r from-game-primary/20 via-game-secondary/20 to-game-accent/20 opacity-0 group-hover:opacity-100 transition-opacity z-10"></div>
-                            <img
+                            {/* <img
                                 src={game.image}
                                 alt={game.title}
                                 className="w-full h-[400px] object-cover group-hover:scale-110 group-hover:blur-sm transition duration-500"
+                            /> */}
+                            <div className="w-full h-[400px] relative">
+                            <Image
+                                src={game.image}
+                                alt={game.title}
+                                fill={true}
+                                style={{objectFit: "cover"}}
+                                className="group-hover:scale-110 group-hover:blur-sm transition duration-500"
                             />
+                            </div>
                             <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent flex flex-col justify-end p-6 z-20">
                                 <div className="flex justify-between items-center">
                                     <div>
