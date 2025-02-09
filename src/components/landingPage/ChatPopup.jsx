@@ -1,5 +1,6 @@
 import { Gamepad2, X, MessageCircle, Paperclip, Send, Image as ImageIcon, File} from 'lucide-react';
 import {useState,useRef,useEffect} from 'react'
+import { useAuth } from "@/hooks/auth";
 const dummyMessages = [
     {
       id: '1',
@@ -28,6 +29,7 @@ const dummyMessages = [
     },
   ];
 function ChatPopup() {
+    const { user } = useAuth();
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState(dummyMessages);
     const [newMessage, setNewMessage] = useState('');
@@ -86,14 +88,25 @@ function ChatPopup() {
   
     return (
       <>
-        <button
+        {/* <button
           onClick={() => setIsOpen(true)}
           className={`fixed bottom-6 left-6 w-14 h-14 rounded-full bg-game-primary text-white flex items-center justify-center shadow-lg hover:bg-[#4f46e5] transition-colors z-50 ${
             isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'
           }`}
         >
           <MessageCircle className="w-6 h-6" />
-        </button>
+        </button> */}
+
+        {user && ( // Show chat button only if the user is logged in
+          <button
+            onClick={() => setIsOpen(true)}
+            className={`fixed bottom-6 left-6 w-14 h-14 rounded-full bg-game-primary text-white flex items-center justify-center shadow-lg hover:bg-[#4f46e5] transition-colors z-50 ${
+              isOpen ? "opacity-0 pointer-events-none" : "opacity-100"
+            }`}
+          >
+            <MessageCircle className="w-6 h-6" />
+          </button>
+        )}
   
         {isOpen && (
           <div className="fixed inset-0 bg-gray-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
