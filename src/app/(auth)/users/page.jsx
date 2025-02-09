@@ -8,7 +8,7 @@ import {useRouter} from 'next/navigation';
 const SocialLogin = () => {
   const { socialLogin } = useAuth({
     middleware: 'guest',
-    redirectIfAuthenticated: '/dashboard'
+    redirectIfAuthenticated: '/'
   });
   const [errors, setErrors] = useState([]);
   const handleSocialLogin = (provider) => {
