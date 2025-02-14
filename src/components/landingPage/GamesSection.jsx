@@ -116,7 +116,7 @@ export default function GamesSection() {
                     Dive into our selection of popular competitive games and
                     start your journey to the top.
                 </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 gap-y-10  mx-4 sm:mx-20 sm:gap-10 lg:gap-35 lg:gap-y-10 place-items-center">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 gap-y-10 mx-4 sm:mx-20 sm:gap-50 lg:gap-35 lg:gap-y-10 place-items-center">
                     {displayedGames.map((game, index) => (
                         <div
                             key={index}
@@ -148,11 +148,11 @@ export default function GamesSection() {
                                 {screenWidth < 768 && (
                                     <button
                                         onClick={() => handleJoinGameClick(game.title)}
-                                        className=" absolute inset-0  items-center rounded-lg text-sm font-medium"
+                                        className="absolute inset-0 items-center rounded-lg text-sm font-medium"
                                     >
-                                    <span className="border border-white text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-sm sm:text-base">
-                                        Play Game
-                                    </span>
+                                        <span className="border border-white text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-sm sm:text-base">
+                                            Play Game
+                                        </span>
                                     </button>
                                 )}
                                 <button
