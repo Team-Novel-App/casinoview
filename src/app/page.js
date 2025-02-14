@@ -10,6 +10,7 @@ import WhyChooseUs from '@/components/landingPage/WhyChooseUs';
 import FAQSection from '@/components/landingPage/FAQSection';
 import MarqueeText from '@/components/landingPage/MarqueeText';
 import AboutUs from '@/components/landingPage/AboutUs';
+import Testimonial from '@/components/landingPage/Testomonials';
 const HeroSection =  dynamic(()=>import('@/components/landingPage/HeroSection'),{loading: ()=><LoadingSpinner />,ssr:false});
 const GamesSection = dynamic(() => import('@/components/landingPage/GamesSection'),{loading: ()=><LoadingSpinner />,ssr:false});
 const ChatPopup = dynamic(() => import('@/components/landingPage/ChatPopup'),{loading: ()=><LoadingSpinner />,ssr:false});
@@ -37,6 +38,7 @@ function Home() {
       <WhyChooseUs />
       <RulesSection />
       <FAQSection />
+      <Testimonial />
       <Footer />
       <ChatPopup />
     </div>
