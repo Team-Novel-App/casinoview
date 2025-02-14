@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react'
 import { ChevronDown, ChevronUp } from 'lucide-react'
 import Image from 'next/image'
 
-
 export default function GamesSection() {
     const [showAll, setShowAll] = useState(false)
     const [screenWidth, setScreenWidth] = useState(
@@ -101,62 +100,65 @@ export default function GamesSection() {
         screenWidth < 1536 && games.length > (screenWidth >= 768 ? 8 : 3)
 
     return (
-        <section id="games" className="py-32  bg-gray-900">
-            <div className="container mx-auto px-4">
+        <section id="games" className="py-16 md:py-24 lg:py-32 bg-gray-900">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <h2
                     data-aos="fade-down"
                     data-aos-duration="1000"
-                    className="text-white text-4xl md:text-5xl font-bold text-center mb-4">
+                    className="text-white text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-4">
                     Featured Games
                 </h2>
                 <p
                     data-aos="fade-down"
                     data-aos-duration="1000"
                     data-aos-delay="200"
-                    className="text-gray-400 text-center mb-16 max-w-2xl mx-auto">
+                    className="text-gray-400 text-center mb-12 md:mb-16 max-w-2xl mx-auto text-sm sm:text-base">
                     Dive into our selection of popular competitive games and
                     start your journey to the top.
                 </p>
-                <div className="grid md:grid-cols-4  gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 gap-y-10  mx-4 sm:mx-20 sm:gap-10 lg:gap-35 lg:gap-y-10 place-items-center">
                     {displayedGames.map((game, index) => (
                         <div
                             key={index}
                             data-aos="fade-up"
                             data-aos-duration="1000"
                             data-aos-delay={100 * (index + 1)}
-                            className="group relative overflow-hidden rounded-lg gradient-border">
+                            className="group relative w-full sm:w-[300px] lg:max-w-[280px] overflow-hidden rounded-lg gradient-border">
                             <div className="absolute inset-0 bg-gradient-to-r from-game-primary/20 via-game-secondary/20 to-game-accent/20 opacity-0 group-hover:opacity-100 transition-opacity z-10"></div>
-                            {/* <img
-                                src={game.image}
-                                alt={game.title}
-                                className="w-full h-[400px] object-cover group-hover:scale-110 group-hover:blur-sm transition duration-500"
-                            /> */}
-                            <div className="w-full h-[400px] relative">
-                            <Image
-                                src={game.image}
-                                alt={game.title}
-                                fill={true}
-                                style={{objectFit: "cover"}}
-                                className="group-hover:scale-110 group-hover:blur-sm transition duration-500"
-                            />
+                            <div className="w-full h-[300px] sm:h-[150px] md:h-[350px] relative">
+                                <Image
+                                    src={game.image}
+                                    alt={game.title}
+                                    fill={true}
+                                    style={{objectFit: "cover"}}
+                                    className="group-hover:scale-110 group-hover:blur-sm transition duration-500"
+                                />
                             </div>
-                            <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent flex flex-col justify-end p-6 z-20">
+                            <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent flex flex-col justify-end p-4 sm:p-6 z-20">
                                 <div className="flex justify-between items-center">
                                     <div>
-                                        <h3 className="text-xl font-bold mb-2">
+                                        <h3 className="text-lg sm:text-xl font-bold mb-1 sm:mb-2">
                                             {game.title}
                                         </h3>
-                                        <p className="text-gray-400">
+                                        <p className="text-gray-400 text-sm sm:text-base">
                                             {game.players} Active Players
                                         </p>
                                     </div>
                                 </div>
+                                {screenWidth < 768 && (
+                                    <button
+                                        onClick={() => handleJoinGameClick(game.title)}
+                                        className=" absolute inset-0  items-center rounded-lg text-sm font-medium"
+                                    >
+                                    <span className="border border-white text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-sm sm:text-base">
+                                        Play Game
+                                    </span>
+                                    </button>
+                                )}
                                 <button
-                                    onClick={() =>
-                                        handleJoinGameClick(game.title)
-                                    }
+                                    onClick={() => handleJoinGameClick(game.title)}
                                     className="absolute inset-0 flex justify-center items-center opacity-0 group-hover:opacity-100 transition">
-                                    <span className="border border-white text-white px-4 py-2 rounded-lg">
+                                    <span className="border border-white text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-sm sm:text-base">
                                         Play Game
                                     </span>
                                 </button>
@@ -169,7 +171,7 @@ export default function GamesSection() {
                     <div className="mt-8 text-center flex justify-center">
                         <button
                             onClick={() => setShowAll(!showAll)}
-                            className="text-white gradient-border bg-gray-900 px-6 py-2 font-medium flex items-center gap-2">
+                            className="text-white gradient-border bg-gray-900 px-4 sm:px-6 py-2 text-sm sm:text-base font-medium flex items-center gap-2">
                             {showAll ? 'Show Less' : 'See More'}
                             {showAll ? (
                                 <ChevronUp size={18} />
