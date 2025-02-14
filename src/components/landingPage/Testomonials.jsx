@@ -20,7 +20,7 @@ export default function Testimonial() {
     ]
 
     useEffect(() => {
-        AOS.init({ duration: 1000, once: true }) // Initialize AOS
+        AOS.init({ duration: 1000, once: true }) // Initialize AOS for scrolling effects
         const checkScreenSize = () => setIsMobile(window.innerWidth < 768)
         checkScreenSize()
         window.addEventListener('resize', checkScreenSize)
@@ -28,7 +28,7 @@ export default function Testimonial() {
     }, [])
 
     return (
-        <section className="py-10 sm:py-30 bg-gray-900 relative overflow-hidden">
+        <section className="py-10 sm:py-30 bg-gray-900 relative overflow-hidden" data-aos="fade-up">
             <style>
                 {`
                     .swiper-pagination-bullet {
@@ -91,8 +91,8 @@ export default function Testimonial() {
                         className="pb-16"
                         onSwiper={swiper => (swiperRef.current = swiper)}>
                         {testimonials.map(testimonial => (
-                            <SwiperSlide key={testimonial.id} data-aos="zoom-in">
-                                <div className="bg-[#100f2b] rounded-2xl w-[320px] sm:w-full p-6 sm:p-10 m-4 h-full">
+                            <SwiperSlide key={testimonial.id}>
+                                <div className="bg-[#100f2b] rounded-2xl sm:w-full p-6 sm:p-10 m-4 h-full">
                                     <div className="flex gap-1">
                                         {[...Array(5)].map((_, i) => (
                                             <svg
