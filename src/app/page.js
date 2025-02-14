@@ -30,13 +30,13 @@ function Home() {
       <Navigation isScrolled={isScrolled} />
       <Suspense fallback={<LoadingSpinner />}>
          <HeroSection />
-         <GamesSection />
+         <EventsSection />
       </Suspense>    
+      <GamesSection />
       <AboutUs />
-      <EventsSection />
       <MarqueeText />
-      <RulesSection />
       <WhyChooseUs />
+      <RulesSection />
       <FAQSection />
       <Testimonial />
       <Footer />
