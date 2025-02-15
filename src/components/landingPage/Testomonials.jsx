@@ -4,77 +4,42 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import { useRef, useState, useEffect } from 'react'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 export default function Testimonial() {
     const [isMobile, setIsMobile] = useState(false)
     const swiperRef = useRef(null)
 
     const testimonials = [
-        {
-            id: 1,
-            name: 'Kylie Rogers',
-            role: 'Player',
-            rating: 4,
-            comment:
-                'Adipiscing elit, sed do eiusmod tempor incididunt labore dolore magna aliqua.',
-        },
-        {
-            id: 2,
-            name: 'Peter Parker',
-            role: 'Player',
-            rating: 4,
-            comment:
-                'Adipiscing elit, sed do eiusmod tempor incididunt labore dolore magna aliqua. Adipiscing elit.',
-        },
-        {
-            id: 3,
-            name: 'Sam Smith',
-            role: 'Player',
-            rating: 5,
-            comment:
-                'Adipiscing elit, sed do eiusmod tempor incididunt labore dolore magna aliqua.',
-        },
-        {
-            id: 4,
-            name: 'Emma Wilson',
-            role: 'Player',
-            rating: 5,
-            comment:
-                'Adipiscing elit, sed do eiusmod tempor incididunt labore dolore magna aliqua.',
-        },
-        {
-            id: 5,
-            name: 'Emma Wilson',
-            role: 'Player',
-            rating: 5,
-            comment:
-                'Adipiscing elit, sed do eiusmod tempor incididunt labore dolore magna aliqua.',
-        },
+        { id: 1, name: 'Kylie Rogers', role: 'Player', rating: 4, comment: 'Adipiscing elit, sed do eiusmod tempor incididunt labore dolore magna aliqua.' },
+        { id: 2, name: 'Peter Parker', role: 'Player', rating: 4, comment: 'Adipiscing elit, sed do eiusmod tempor incididunt labore dolore magna aliqua. Adipiscing elit.' },
+        { id: 3, name: 'Sam Smith', role: 'Player', rating: 5, comment: 'Adipiscing elit, sed do eiusmod tempor incididunt labore dolore magna aliqua.' },
+        { id: 4, name: 'Emma Wilson', role: 'Player', rating: 5, comment: 'Adipiscing elit, sed do eiusmod tempor incididunt labore dolore magna aliqua.' },
+        { id: 5, name: 'Emma Wilson', role: 'Player', rating: 5, comment: 'Adipiscing elit, sed do eiusmod tempor incididunt labore dolore magna aliqua.' },
     ]
 
     useEffect(() => {
-        const checkScreenSize = () => {
-            setIsMobile(window.innerWidth < 768)
-        }
+        AOS.init({ duration: 1000, once: true }) // Initialize AOS for scrolling effects
+        const checkScreenSize = () => setIsMobile(window.innerWidth < 768)
         checkScreenSize()
         window.addEventListener('resize', checkScreenSize)
         return () => window.removeEventListener('resize', checkScreenSize)
     }, [])
 
     return (
-        <section className="py-10 sm:py-30 bg-gray-900 relative overflow-hidden">
-            {/* custom css for pagination */}
+        <section className="py-10 sm:py-30 bg-gray-900 relative overflow-hidden" data-aos="fade-up">
             <style>
                 {`
                     .swiper-pagination-bullet {
-                        background-color: #eeeff0; /* Inactive dot color */
+                        background-color: #eeeff0;
                         opacity: 1;
                         width: 12px;
                         height: 12px;
                         margin: 0 8px !important;
                     }
                     .swiper-pagination-bullet-active {
-                        background-color: #09a347; /* Active dot color */
+                        background-color: #09a347;
                     }
                 `}
             </style>
@@ -83,7 +48,7 @@ export default function Testimonial() {
             <div className="absolute top-0 right-0 w-1/3 h-full bg-red-900/20 blur-[150px]" />
 
             <div className="container mx-auto px-4 relative">
-                <div className="text-center mb-12">
+                <div className="text-center mb-12" data-aos="fade-up">
                     <h3 className="text-white text-2xl sm:text-5xl font-bold">
                         Winners feedback
                     </h3>
@@ -92,24 +57,15 @@ export default function Testimonial() {
                     </h2>
                 </div>
 
-                <div className="relative">
+                <div className="relative" data-aos="fade-up">
                     {!isMobile && (
                         <>
                             <button
                                 onClick={() => swiperRef.current?.slidePrev()}
                                 className="absolute left-[-33px] sm:left-[-40px] top-1/2 -translate-y-1/2 z-10 bg-gray-300 p-3 sm:p-4 rounded-full shadow-lg hover:bg-gray-400 transition-all duration-300"
                                 aria-label="Previous">
-                                <svg
-                                    className="w-5 h-5 sm:w-6 sm:h-6 text-black"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M15 19l-7-7 7-7"
-                                    />
+                                <svg className="w-5 h-5 sm:w-6 sm:h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                                 </svg>
                             </button>
 
@@ -117,17 +73,8 @@ export default function Testimonial() {
                                 onClick={() => swiperRef.current?.slideNext()}
                                 className="absolute right-[-20px] sm:right-[-56px] top-1/2 -translate-y-1/2 z-10 bg-gray-300 p-3 sm:p-4 rounded-full shadow-lg hover:bg-gray-400 transition-all duration-300"
                                 aria-label="Next">
-                                <svg
-                                    className="w-5 h-5 sm:w-6 sm:h-6 text-black"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M9 5l7 7-7 7"
-                                    />
+                                <svg className="w-5 h-5 sm:w-6 sm:h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                 </svg>
                             </button>
                         </>
@@ -137,21 +84,15 @@ export default function Testimonial() {
                         modules={[Navigation, Pagination, Autoplay]}
                         spaceBetween={20}
                         slidesPerView={1}
-                        breakpoints={{
-                            768: { slidesPerView: 2 },
-                            1024: { slidesPerView: 3 },
-                        }}
-                        pagination={{
-                            clickable: true,
-                            el: '.swiper-pagination',
-                        }}
+                        breakpoints={{ 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }}
+                        pagination={{ clickable: true, el: '.swiper-pagination' }}
                         autoplay={{ delay: 3000 }}
                         loop
                         className="pb-16"
                         onSwiper={swiper => (swiperRef.current = swiper)}>
                         {testimonials.map(testimonial => (
                             <SwiperSlide key={testimonial.id}>
-                                <div className="bg-[#100f2b] rounded-2xl w-[320px] sm:w-full p-6 sm:p-10 m-4 h-full">
+                                <div className="bg-[#100f2b] rounded-2xl sm:w-full p-6 sm:p-10 m-4 h-full">
                                     <div className="flex gap-1">
                                         {[...Array(5)].map((_, i) => (
                                             <svg
@@ -170,9 +111,7 @@ export default function Testimonial() {
                                         <h4 className="text-white text-[20px] sm:text-2xl font-semibold">
                                             {testimonial.name}
                                         </h4>
-                                        <p className="text-gray-400">
-                                            {testimonial.role}
-                                        </p>
+                                        <p className="text-gray-400">{testimonial.role}</p>
                                     </div>
                                 </div>
                             </SwiperSlide>
