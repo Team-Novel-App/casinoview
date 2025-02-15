@@ -2,12 +2,26 @@
 import React, { useState, useEffect } from 'react'
 import { ChevronDown, ChevronUp } from 'lucide-react'
 import Image from 'next/image'
+import dynamic from 'next/dynamic';
+
+const Lottie = dynamic(() => import('lottie-react'), {
+  ssr: false,
+});
 
 export default function GamesSection() {
     const [showAll, setShowAll] = useState(false)
     const [screenWidth, setScreenWidth] = useState(
         typeof window !== 'undefined' ? window.innerWidth : 0,
-    )
+    );
+    const [fireAnimation, setFireAnimation] = useState(null);
+
+     useEffect(() => {
+    if (typeof window !== 'undefined') {
+      import('/Lottie/fire.json').then((data) => {
+        setFireAnimation(data.default);
+      });
+    }
+  }, []);
 
     useEffect(() => {
         const handleResize = () => {
@@ -143,6 +157,9 @@ export default function GamesSection() {
                                         <p className="text-gray-400 text-sm sm:text-base">
                                             {game.players} Active Players
                                         </p>
+                                    </div>
+                                    <div className="ml-4">
+                                        
                                     </div>
                                 </div>
                                 {screenWidth < 768 && (
