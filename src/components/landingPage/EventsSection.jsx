@@ -1,5 +1,10 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import { Gift, Send } from "lucide-react";
+
+// Dynamically import AOS to avoid SSR issues
+const AOS = dynamic(() => import("aos"), { ssr: false });
 
 const bonusCards = [
   {
@@ -21,13 +26,22 @@ const bonusCards = [
 ];
 
 export default function EventSection() {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+    import("aos").then((AOS) => {
+      AOS.init({ duration: 1000, once: true });
+    });
+  }, []);
+
   return (
     <section id="tournaments" className="py-26 bg-gray-900">
       <div className="container mx-auto px-4 text-center">
-        <h2 className="text-white text-4xl md:text-5xl font-bold mb-4" data-aos="fade-down">
+        <h2 className="text-white text-4xl md:text-5xl font-bold mb-4" {...(isClient && { "data-aos": "fade-down" })}>
           Earn Rewards & Bonuses
         </h2>
-        <p className="text-gray-400 mb-16 max-w-2xl mx-auto" data-aos="fade-down" data-aos-delay="100">
+        <p className="text-gray-400 mb-16 max-w-2xl mx-auto" {...(isClient && { "data-aos": "fade-down", "data-aos-delay": "100" })}>
           Participate in our referral program and upcoming bonuses to maximize your rewards.
         </p>
 
@@ -36,8 +50,7 @@ export default function EventSection() {
             <div
               key={index}
               className="relative p-1 rounded-xl shadow-lg transform transition-all hover:scale-105"
-              data-aos={index % 2 === 0 ? "fade-right" : "fade-left"}
-              data-aos-delay={index * 200}
+              {...(isClient && { "data-aos": index % 2 === 0 ? "fade-right" : "fade-left", "data-aos-delay": index * 200 })}
             >
               <div className="relative bg-gray-800 p-8 rounded-xl border border-gray-700 shadow-md">
                 <div className="flex items-center gap-4 mb-4">
