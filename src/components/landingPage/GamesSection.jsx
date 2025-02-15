@@ -116,7 +116,7 @@ export default function GamesSection() {
                     Dive into our selection of popular competitive games and
                     start your journey to the top.
                 </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 gap-y-10 mx-4 sm:mx-20 sm:gap-50 lg:gap-35 lg:gap-y-10 place-items-center">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 gap-y-10 mx-4 sm:mx-20 sm:gap-50 sm:gap-y-16 lg:gap-35 lg:gap-y-10 place-items-center">
                     {displayedGames.map((game, index) => (
                         <div
                             key={index}
@@ -125,7 +125,7 @@ export default function GamesSection() {
                             data-aos-delay={100 * (index + 1)}
                             className="group relative w-full sm:w-[300px] lg:max-w-[280px] overflow-hidden rounded-lg gradient-border">
                             <div className="absolute inset-0 bg-gradient-to-r from-game-primary/20 via-game-secondary/20 to-game-accent/20 opacity-0 group-hover:opacity-100 transition-opacity z-10"></div>
-                            <div className="w-full h-[300px] sm:h-[150px] md:h-[350px] relative">
+                            <div className="w-full h-[300px] sm:h-[200px] md:h-[350px] relative">
                                 <Image
                                     src={game.image}
                                     alt={game.title}
