@@ -12,6 +12,24 @@ import "swiper/css/navigation";
 import { useRouter } from "next/navigation";
 import "swiper/css/pagination";
 
+const fallbackSlides = [
+  {
+    image: "/assets/images/heroSectionImg/img2.jpg",
+    title: "Discount at pre-registration",
+    subtitle: "Join the ultimate gaming community where legends are born. Compete in tournaments, connect with fellow gamers, and embrace victory.",
+  },
+  {
+    image: "/assets/images/heroSectionImg/img1.jpg",
+    title: "Spin the wheel of your success",
+    subtitle: "Enter tournaments with massive prize pools and prove your worth against the best players worldwide.",
+  },
+  {
+    image: "/assets/images/heroSectionImg/img2.jpg",
+    title: "Play Roulette and Win Big",
+    subtitle: "Connect with millions of players, share your achievements, and make lasting friendships in our vibrant community.",
+  },
+];
+
 export default function HeroSection() {
   const router = useRouter();
   const [banners, setBanners] = useState([]);
@@ -21,11 +39,15 @@ export default function HeroSection() {
       try {
         const response = await fetch('http://localhost:8000/api/active-banners');
         const data = await response.json();
-        setBanners(data.banners);
+        const validBanners = data.banners?.map(banner => ({
+          ...banner,
+          image_url: banner.image_url || null,
+          image: banner.image || null,
+        })) || [];
+        setBanners(validBanners.length > 0 ? validBanners : fallbackSlides);
       } catch (error) {
         console.error('Error fetching banners:', error);
-        // Fallback to empty array if fetch fails
-        setBanners([]);
+        setBanners(fallbackSlides);
       }
     };
 
@@ -61,14 +83,18 @@ export default function HeroSection() {
           loop={banners.length > 1}
           className="h-full"
         >
-          {banners.map((banner, index) => (
+          {banners.map((slide, index) => (
             <SwiperSlide key={index}>
               <div className="relative w-full h-full">
                 <div className="absolute inset-0">
                   <div className="absolute inset-0 bg-gradient-to-r from-gray-900/90 to-gray-900/50 z-10" />
                   <Image
-                    src={`http://localhost:8000${banner.image_url}`}
-                    alt={banner.title}
+                    src={
+                      slide.image_url 
+                        ? `http://localhost:8000${slide.image_url}` 
+                        : (slide.image || '/assets/images/placeholder.jpg')
+                    }
+                    alt={slide.title || 'Slide image'}
                     fill={true}
                     style={{ objectFit: "cover" }}
                   />
@@ -79,14 +105,14 @@ export default function HeroSection() {
                       className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-retro-signed leading-tight mb-4 sm:mb-6"
                       data-aos="fade-up"
                     >
-                      {banner.title}
+                      {slide.title}
                     </h1>
                     <p
                       className="text-white text-base sm:text-lg mb-6 sm:mb-8 max-w-xl"
                       data-aos="fade-up"
                       data-aos-delay="500"
                     >
-                      {banner.description}
+                      {slide.description || slide.subtitle}
                     </p>
                     <div
                       className="flex flex-col sm:flex-row gap-3 sm:gap-4"
