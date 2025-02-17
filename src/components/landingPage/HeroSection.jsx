@@ -11,6 +11,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { useRouter } from "next/navigation";
 import "swiper/css/pagination";
+import axios from "@/lib/axios";
 
 const fallbackSlides = [
   {
@@ -37,8 +38,8 @@ export default function HeroSection() {
   useEffect(() => {
     const fetchBanners = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/active-banners');
-        const data = await response.json();
+        const response = await axios.get('/api/active-banners');
+        const data = response.data;
         const validBanners = data.banners?.map(banner => ({
           ...banner,
           image_url: banner.image_url || null,
@@ -91,7 +92,7 @@ export default function HeroSection() {
                   <Image
                     src={
                       slide.image_url 
-                        ? `http://localhost:8000${slide.image_url}` 
+                        ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${slide.image_url}` 
                         : (slide.image || '/assets/images/placeholder.jpg')
                     }
                     alt={slide.title || 'Slide image'}
