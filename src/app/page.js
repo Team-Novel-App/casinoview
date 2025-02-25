@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState, useEffect,Suspense} from 'react';
 import dynamic from 'next/dynamic';
 import Navigation from '@/components/landingPage/Navigation';
@@ -11,6 +12,7 @@ import FAQSection from '@/components/landingPage/FAQSection';
 import MarqueeText from '@/components/landingPage/MarqueeText';
 import AboutUs from '@/components/landingPage/AboutUs';
 import Testimonial from '@/components/landingPage/Testomonials';
+import CatSection from '@/components/landingPage/CatSection';
 const HeroSection =  dynamic(()=>import('@/components/landingPage/HeroSection'),{loading: ()=><LoadingSpinner />,ssr:false});
 const GamesSection = dynamic(() => import('@/components/landingPage/GamesSection'),{loading: ()=><LoadingSpinner />,ssr:false});
 const ChatPopup = dynamic(() => import('@/components/landingPage/ChatPopup'),{loading: ()=><LoadingSpinner />,ssr:false});
@@ -33,8 +35,9 @@ function Home() {
          <EventsSection />
       </Suspense>    
       <GamesSection />
-      <AboutUs />
       <MarqueeText />
+      <AboutUs />
+      <CatSection/>
       <WhyChooseUs />
       <RulesSection />
       <FAQSection />
