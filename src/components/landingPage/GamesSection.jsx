@@ -2,12 +2,31 @@
 import React, { useState, useEffect } from 'react'
 import { ChevronDown, ChevronUp } from 'lucide-react'
 import Image from 'next/image'
+import dynamic from 'next/dynamic';
+
+const Lottie = dynamic(() => import('lottie-react'), {
+  ssr: false,
+});
 
 export default function GamesSection() {
     const [showAll, setShowAll] = useState(false)
     const [screenWidth, setScreenWidth] = useState(
         typeof window !== 'undefined' ? window.innerWidth : 0,
-    )
+    );
+    const [fireAnimation, setFireAnimation] = useState(null);
+
+    useEffect(() => {
+    if (typeof window !== 'undefined') {
+        fetch('/Lottie/fire.json')
+          .then((response) => response.json())
+          .then((data) => {
+            setFireAnimation(data);
+          })
+          .catch((error) => {
+            console.error('Error loading Lottie animation:', error);
+          });
+      }
+    }, []);
 
     useEffect(() => {
         const handleResize = () => {
@@ -23,61 +42,73 @@ export default function GamesSection() {
             title: 'Apex Legends',
             image: '/assets/images/gameSectionImg/img1.jpg',
             players: '50K+',
+            hot:true
         },
         {
             title: 'Valorant',
             image: '/assets/images/gameSectionImg/img2.jpg',
             players: '45K+',
+            hot:true
         },
         {
             title: 'League of Legends',
             image: '/assets/images/gameSectionImg/img3.jpg',
-            players: '100K+',
+            players: '10K+',
+            hot:false
         },
         {
             title: 'Hot Deco',
             image: '/assets/images/gameSectionImg/img4.jpg',
             players: '80K+',
+            hot:true
         },
         {
             title: 'Game Time',
             image: '/assets/images/gameSectionImg/img5.jpg',
             players: '80K+',
+            hot:false
         },
         {
             title: 'Poker',
             image: '/assets/images/gameSectionImg/img6.jpg',
             players: '80K+',
+            hot:false
         },
         {
             title: 'Casino Night',
             image: '/assets/images/gameSectionImg/img7.jpg',
             players: '80K+',
+            hot:true
         },
         {
             title: 'Hot Deco',
             image: '/assets/images/gameSectionImg/img8.jpg',
             players: '80K+',
+            hot:true
         },
         {
             title: 'Hot Deco',
             image: '/assets/images/gameSectionImg/img9.jpeg',
             players: '80K+',
+            hot:false
         },
         {
             title: 'Hot Deco',
             image: '/assets/images/gameSectionImg/img10.jpg',
             players: '80K+',
+            hot: true
         },
         {
             title: 'Hot Deco',
             image: '/assets/images/gameSectionImg/img11.jpeg',
             players: '80K+',
+            hot:false
         },
         {
             title: 'Hot Deco',
             image: '/assets/images/gameSectionImg/img12.jpeg',
             players: '80K+',
+            hot:false
         },
     ]
 
@@ -116,7 +147,7 @@ export default function GamesSection() {
                     Dive into our selection of popular competitive games and
                     start your journey to the top.
                 </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 gap-y-10  mx-4 sm:mx-20 sm:gap-10 lg:gap-35 lg:gap-y-10 place-items-center">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 gap-y-10 mx-4 sm:mx-20 sm:gap-50 sm:gap-y-16 lg:gap-25 lg:gap-y-20 place-items-center">
                     {displayedGames.map((game, index) => (
                         <div
                             key={index}
@@ -125,7 +156,7 @@ export default function GamesSection() {
                             data-aos-delay={100 * (index + 1)}
                             className="group relative w-full sm:w-[300px] lg:max-w-[280px] overflow-hidden rounded-lg gradient-border">
                             <div className="absolute inset-0 bg-gradient-to-r from-game-primary/20 via-game-secondary/20 to-game-accent/20 opacity-0 group-hover:opacity-100 transition-opacity z-10"></div>
-                            <div className="w-full h-[300px] sm:h-[150px] md:h-[350px] relative">
+                            <div className="w-full h-[300px] sm:h-[200px] md:h-[350px] relative">
                                 <Image
                                     src={game.image}
                                     alt={game.title}
@@ -144,15 +175,30 @@ export default function GamesSection() {
                                             {game.players} Active Players
                                         </p>
                                     </div>
+                                    {game.hot && (
+                                      <div className="ml-4 w-7 h-7 mb-9 z-30 flex flex-col items-center">
+                                        {fireAnimation && (
+                                          <Lottie
+                                            animationData={fireAnimation}
+                                            loop={true}
+                                            aria-label="Fire animation"
+                                            className="w-7 h-7"
+                                          />
+                                        )}
+                                        <p className="text-red-400 text-xs sm:text-sm font-bold mt-1">
+                                          Hot
+                                        </p>
+                                      </div>
+                                    )}                        
                                 </div>
                                 {screenWidth < 768 && (
                                     <button
                                         onClick={() => handleJoinGameClick(game.title)}
-                                        className=" absolute inset-0  items-center rounded-lg text-sm font-medium"
+                                        className="absolute inset-0 items-center rounded-lg text-sm font-medium"
                                     >
-                                    <span className="border border-white text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-sm sm:text-base">
-                                        Play Game
-                                    </span>
+                                        <span className="border border-white text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-sm sm:text-base">
+                                            Play Game
+                                        </span>
                                     </button>
                                 )}
                                 <button
