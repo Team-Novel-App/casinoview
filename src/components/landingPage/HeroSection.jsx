@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -11,33 +11,50 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { useRouter } from "next/navigation";
 import "swiper/css/pagination";
+import axios from "@/lib/axios";
 
-const heroSlides = [
+const fallbackSlides = [
   {
     image: "/assets/images/heroSectionImg/img2.jpg",
     title: "Discount at pre-registration",
-    subtitle:
-      "Join the ultimate gaming community where legends are born. Compete in tournaments, connect with fellow gamers, and embrace victory.",
+    subtitle: "Join the ultimate gaming community where legends are born. Compete in tournaments, connect with fellow gamers, and embrace victory.",
   },
   {
     image: "/assets/images/heroSectionImg/img1.jpg",
     title: "Spin the wheel of your success",
-    subtitle:
-      "Enter tournaments with massive prize pools and prove your worth against the best players worldwide.",
+    subtitle: "Enter tournaments with massive prize pools and prove your worth against the best players worldwide.",
   },
   {
     image: "/assets/images/heroSectionImg/img2.jpg",
     title: "Play Roulette and Win Big",
-    subtitle:
-      "Connect with millions of players, share your achievements, and make lasting friendships in our vibrant community.",
+    subtitle: "Connect with millions of players, share your achievements, and make lasting friendships in our vibrant community.",
   },
 ];
 
 export default function HeroSection() {
   const router = useRouter();
-  const handleJoinClick = () => {
-    router.push("/users");
-  };
+  const [banners, setBanners] = useState([]);
+
+  useEffect(() => {
+    const fetchBanners = async () => {
+      try {
+        const response = await axios.get('/api/active-banners');
+        const data = response.data;
+        const validBanners = data.banners?.map(banner => ({
+          ...banner,
+          image_url: banner.image_url || null,
+          image: banner.image || null,
+        })) || [];
+        setBanners(validBanners.length > 0 ? validBanners : fallbackSlides);
+      } catch (error) {
+        console.error('Error fetching banners:', error);
+        setBanners(fallbackSlides);
+      }
+    };
+
+    fetchBanners();
+  }, []);
+
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -46,12 +63,15 @@ export default function HeroSection() {
     });
   }, []);
 
+  const handleJoinClick = () => {
+    router.push("/users");
+  };
+
   return (
     <section
       id="home"
       className="relative h-screen flex flex-col overflow-hidden bg-gray-900"
     >
-      {/* Main Swiper */}
       <div className="relative h-full">
         <Swiper
           modules={[Autoplay, Navigation, Pagination]}
@@ -61,17 +81,21 @@ export default function HeroSection() {
           speed={1200}
           navigation
           pagination={{ clickable: true }}
-          loop={true}
+          loop={banners.length > 1}
           className="h-full"
         >
-          {heroSlides.map((slide, index) => (
+          {banners.map((slide, index) => (
             <SwiperSlide key={index}>
               <div className="relative w-full h-full">
                 <div className="absolute inset-0">
                   <div className="absolute inset-0 bg-gradient-to-r from-gray-900/90 to-gray-900/50 z-10" />
                   <Image
-                    src={slide.image}
-                    alt={`Slide ${index + 1}`}
+                    src={
+                      slide.image_url 
+                        ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${slide.image_url}` 
+                        : (slide.image || '/assets/images/placeholder.jpg')
+                    }
+                    alt={slide.title || 'Slide image'}
                     fill={true}
                     style={{ objectFit: "cover" }}
                   />
@@ -89,7 +113,7 @@ export default function HeroSection() {
                       data-aos="fade-up"
                       data-aos-delay="500"
                     >
-                      {slide.subtitle}
+                      {slide.description || slide.subtitle}
                     </p>
                     <div
                       className="flex flex-col sm:flex-row gap-3 sm:gap-4"
@@ -99,7 +123,7 @@ export default function HeroSection() {
                       <button onClick={handleJoinClick} className="text-white gradient-border bg-gray-900/50 backdrop-blur-sm px-6 sm:px-8 py-2 sm:py-3 font-medium transition-transform hover:scale-105 flex items-center justify-center gap-2">
                         Join Now <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
                       </button>
-                      <a href="#about"  className="text-white border border-game-primary hover:bg-game-primary/10 px-6 sm:px-8 py-2 sm:py-3 rounded-full font-medium transition backdrop-blur-sm">
+                      <a href="#about" className="text-white border border-game-primary hover:bg-game-primary/10 px-6 sm:px-8 py-2 sm:py-3 rounded-full font-medium transition backdrop-blur-sm">
                         Learn More
                       </a>
                     </div>
@@ -110,7 +134,6 @@ export default function HeroSection() {
           ))}
         </Swiper>
 
-        {/* Dot Pagination */}
         <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 swiper-pagination"></div>
       </div>
     </section>
