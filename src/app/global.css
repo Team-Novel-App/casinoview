@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @config "../../tailwind.config.js";
 
+
 @font-face {
   font-family: 'FontMarquee';
   src: url('../../public/assets/fonts/CoffeetinInitials-YXJ2.ttf')
@@ -8,6 +9,7 @@
   font-weight: normal;
   font-style: normal;
 }
+
 .font-retro-signed {
     font-family: 'CasinoFont', sans-serif;
 }

@@ -164,7 +164,19 @@ export default function GamesSection() {
                                     style={{objectFit: "cover"}}
                                     className="group-hover:scale-110 group-hover:blur-sm transition duration-500"
                                 />
+                                {game.hot && (
+                                <div className="absolute top-2 right-1 z-30">
+                                <Image
+                                    src="/assets/images/gameSectionImg/hotIcon.gif"
+                                    alt="Hot Icon"
+                                    width={164}  
+                                    height={164} 
+                                    className="w-26 h-26 object-contain"
+                                    />
+                                </div>
+                                )}                        
                             </div>
+
                             <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent flex flex-col justify-end p-4 sm:p-6 z-20">
                                 <div className="flex justify-between items-center">
                                     <div>
@@ -175,21 +187,7 @@ export default function GamesSection() {
                                             {game.players} Active Players
                                         </p>
                                     </div>
-                                    {game.hot && (
-                                      <div className="ml-4 w-7 h-7 mb-9 z-30 flex flex-col items-center">
-                                        {fireAnimation && (
-                                          <Lottie
-                                            animationData={fireAnimation}
-                                            loop={true}
-                                            aria-label="Fire animation"
-                                            className="w-7 h-7"
-                                          />
-                                        )}
-                                        <p className="text-red-400 text-xs sm:text-sm font-bold mt-1">
-                                          Hot
-                                        </p>
-                                      </div>
-                                    )}                        
+                                    
                                 </div>
                                 {screenWidth < 768 && (
                                     <button
