@@ -1,6 +1,7 @@
 import { Gamepad2, X, MessageCircle, Paperclip, Send, Image as ImageIcon, File} from 'lucide-react';
 import {useState,useRef,useEffect} from 'react'
 import { useAuth } from "@/hooks/auth";
+import axios from "@/lib/axios";
 const dummyMessages = [
     {
       id: '1',
@@ -51,6 +52,19 @@ function ChatPopup() {
         document.body.style.overflow = 'unset';
       };
     }, [messages, isOpen]);
+
+    useEffect(()=>{
+      fetchChat();
+    },[])
+
+    const fetchChat = async () =>{
+      try {
+        const res = await axios.get('api/chats');
+        console.log(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
   
     const handleSendMessage = () => {
       if (newMessage.trim()) {
