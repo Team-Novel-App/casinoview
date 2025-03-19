@@ -1,3 +1,4 @@
+'use client';
 import { Gamepad2, X, MessageCircle, Paperclip, Send, Image as ImageIcon, File} from 'lucide-react';
 import {useState,useRef,useEffect} from 'react'
 import { useAuth } from "@/hooks/auth";

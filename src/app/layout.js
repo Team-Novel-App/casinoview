@@ -1,14 +1,14 @@
-import { Nunito } from 'next/font/google';
-import '@/app/global.css';
-import AOSProvider from '@/components/AOSProvider';
+import { Nunito } from 'next/font/google'
+import '@/app/global.css'
+import AOSProvider from '@/components/AOSProvider'
 const nunitoFont = Nunito({
     subsets: ['latin'],
     display: 'swap',
-});
+})
 
 export const metadata = {
     title: 'CASINO PLAY',
-};
+}
 
 const RootLayout = ({ children }) => {
     return (
@@ -18,7 +18,7 @@ const RootLayout = ({ children }) => {
                 {children}
             </body>
         </html>
-    );
-};
+    )
+}
 
-export default RootLayout;
+export default RootLayout
