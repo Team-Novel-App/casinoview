@@ -30,7 +30,7 @@ export default function Navigation({ isScrolled }) {
 
     return (
         <nav
-            className={`fixed left-0 right-0 mx-auto z-50 transition-all bg-gradient-to-r from-[#95ecb0]  to-[#43b692] duration-300 ${isScrolled ? 'w-full sm:px-4 py-5 lg:px-10 ' : 'w-[95%] border-white lg:rounded-full md:rounded-full sm:rounded-4xl mt-8 px-4 py-5'} `}>
+            className={`fixed left-0 right-0 mx-auto z-50 transition-all bg-gradient-to-r from-[#d5d3ae]  via-[#a09a63] to-[#534c28] duration-300 ${isScrolled ? 'w-full sm:px-4 py-5 lg:px-10 ' : 'w-[95%] border-white lg:rounded-full md:rounded-full sm:rounded-4xl mt-8 px-4 py-5'} `}>
             <div className=" px-4 w-full mr-10">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
@@ -40,25 +40,25 @@ export default function Navigation({ isScrolled }) {
                         </span>
                     </div>
 
-                    <div className="hidden md:flex items-center gap-8">
+                    <div className="hidden md:flex items-center gap-9">
                         <a
                             href="#home"
-                            className="hover:text-[#4f46e5]  text-black ">
+                            className="text-[#0d012e] text-[20px] font-aldo transition-all duration-200 hover:text-white hover:text-[26px]">
                             Home
                         </a>
                         <a
                             href="#games"
-                            className="hover:text-[#4f46e5] text-black ">
+                            className="text-[#0d012e] text-[20px] font-aldo transition-all duration-200 hover:text-white hover:text-[26px]">
                             Games
                         </a>
                         <a
                             href="#tournaments"
-                            className="hover:text-[#4f46e5] text-black ">
+                            className="text-[#0d012e] text-[20px] font-aldo transition-all duration-200 hover:text-white hover:text-[26px]">
                             Events
                         </a>
                         <a
                             href="#rules"
-                            className="hover:text-[#4f46e5] text-black ">
+                            className="text-[#0d012e] text-[20px] font-aldo transition-all duration-200 hover:text-white hover:text-[26px]">
                             Rules
                         </a>
                     </div>
@@ -73,7 +73,6 @@ export default function Navigation({ isScrolled }) {
                                 {isMobileMenuOpen ? <X /> : <Menu />}
                             </button>
                         </div>
-
 
                         {user ? (
                             <div className="relative hidden md:block">

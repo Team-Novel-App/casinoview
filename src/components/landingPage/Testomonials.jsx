@@ -1,3 +1,4 @@
+'use client'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, Autoplay } from 'swiper/modules'
 import 'swiper/css'
@@ -28,7 +29,9 @@ export default function Testimonial() {
     }, [])
 
     return (
-        <section className="py-10 sm:py-30 bg-gray-900 relative overflow-hidden" data-aos="fade-up">
+        <section
+            className="py-10 sm:py-30 bg-gray-900 relative overflow-hidden"
+            data-aos="fade-up">
             <style>
                 {`
                     .swiper-pagination-bullet {
@@ -49,7 +52,7 @@ export default function Testimonial() {
 
             <div className="container mx-auto px-4 relative">
                 <div className="text-center mb-12" data-aos="fade-up">
-                    <h3 className="text-white text-2xl sm:text-5xl font-bold">
+                    <h3 className="text-white text-4xl sm:text-9xl md:text-4xl lg:text-6xl font-godofwar">
                         Winners feedback
                     </h3>
                     <h2 className="text-gray-200 text-lg font-medium mt-4">
@@ -64,8 +67,17 @@ export default function Testimonial() {
                                 onClick={() => swiperRef.current?.slidePrev()}
                                 className="absolute left-[-33px] sm:left-[-40px] top-1/2 -translate-y-1/2 z-10 bg-gray-300 p-3 sm:p-4 rounded-full shadow-lg hover:bg-gray-400 transition-all duration-300"
                                 aria-label="Previous">
-                                <svg className="w-5 h-5 sm:w-6 sm:h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                <svg
+                                    className="w-5 h-5 sm:w-6 sm:h-6 text-black"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M15 19l-7-7 7-7"
+                                    />
                                 </svg>
                             </button>
 
@@ -73,8 +85,17 @@ export default function Testimonial() {
                                 onClick={() => swiperRef.current?.slideNext()}
                                 className="absolute right-[-20px] sm:right-[-56px] top-1/2 -translate-y-1/2 z-10 bg-gray-300 p-3 sm:p-4 rounded-full shadow-lg hover:bg-gray-400 transition-all duration-300"
                                 aria-label="Next">
-                                <svg className="w-5 h-5 sm:w-6 sm:h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                <svg
+                                    className="w-5 h-5 sm:w-6 sm:h-6 text-black"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M9 5l7 7-7 7"
+                                    />
                                 </svg>
                             </button>
                         </>
@@ -84,8 +105,14 @@ export default function Testimonial() {
                         modules={[Navigation, Pagination, Autoplay]}
                         spaceBetween={20}
                         slidesPerView={1}
-                        breakpoints={{ 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }}
-                        pagination={{ clickable: true, el: '.swiper-pagination' }}
+                        breakpoints={{
+                            768: { slidesPerView: 2 },
+                            1024: { slidesPerView: 3 },
+                        }}
+                        pagination={{
+                            clickable: true,
+                            el: '.swiper-pagination',
+                        }}
                         autoplay={{ delay: 3000 }}
                         loop
                         className="pb-16"
@@ -111,7 +138,9 @@ export default function Testimonial() {
                                         <h4 className="text-white text-[20px] sm:text-2xl font-semibold">
                                             {testimonial.name}
                                         </h4>
-                                        <p className="text-gray-400">{testimonial.role}</p>
+                                        <p className="text-gray-400">
+                                            {testimonial.role}
+                                        </p>
                                     </div>
                                 </div>
                             </SwiperSlide>

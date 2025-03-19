@@ -136,7 +136,7 @@ export default function GamesSection() {
                 <h2
                     data-aos="fade-down"
                     data-aos-duration="1000"
-                    className="text-white text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-4">
+                    className="text-white text-4xl sm:text-9xl md:text-4xl lg:text-6xl font-godofwar text-center mb-4">
                     Featured Games
                 </h2>
                 <p
@@ -161,46 +161,48 @@ export default function GamesSection() {
                                     src={game.image}
                                     alt={game.title}
                                     fill={true}
-                                    style={{objectFit: "cover"}}
+                                    style={{ objectFit: 'cover' }}
                                     className="group-hover:scale-110 group-hover:blur-sm transition duration-500"
                                 />
                                 {game.hot && (
-                                <div className="absolute top-2 right-1 z-30">
-                                <Image
-                                    src="/assets/images/gameSectionImg/hotIcon.gif"
-                                    alt="Hot Icon"
-                                    width={164}  
-                                    height={164} 
-                                    className="w-26 h-26 object-contain"
-                                    />
-                                </div>
-                                )}                        
+                                    <div className="absolute top-2 right-1 z-30">
+                                        <Image
+                                            src="/assets/images/gameSectionImg/hotIcon.gif"
+                                            alt="Hot Icon"
+                                            width={164}
+                                            height={164}
+                                            className="w-26 h-26 object-contain"
+                                        />
+                                    </div>
+                                )}
                             </div>
 
                             <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent flex flex-col justify-end p-4 sm:p-6 z-20">
                                 <div className="flex justify-between items-center">
                                     <div>
-                                        <h3 className="text-lg sm:text-xl font-bold mb-1 sm:mb-2">
+                                        <h3 className="text-lg sm:text-xl font-aldo mb-1 sm:mb-2">
                                             {game.title}
                                         </h3>
                                         <p className="text-gray-400 text-sm sm:text-base">
                                             {game.players} Active Players
                                         </p>
                                     </div>
-                                    
                                 </div>
                                 {screenWidth < 768 && (
                                     <button
-                                        onClick={() => handleJoinGameClick(game.title)}
-                                        className="absolute inset-0 items-center rounded-lg text-sm font-medium"
-                                    >
+                                        onClick={() =>
+                                            handleJoinGameClick(game.title)
+                                        }
+                                        className="absolute inset-0 items-center rounded-lg text-sm font-medium">
                                         <span className="border border-white text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-sm sm:text-base">
                                             Play Game
                                         </span>
                                     </button>
                                 )}
                                 <button
-                                    onClick={() => handleJoinGameClick(game.title)}
+                                    onClick={() =>
+                                        handleJoinGameClick(game.title)
+                                    }
                                     className="absolute inset-0 flex justify-center items-center opacity-0 group-hover:opacity-100 transition">
                                     <span className="border border-white text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-sm sm:text-base">
                                         Play Game

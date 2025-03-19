@@ -10,6 +10,63 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'GodOfWar';
+  src: url('../../public/assets/fonts/GODOFWAR.TTF')
+  format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'PlayFairlDisplay';
+  src: url('../../public/assets/fonts/PlayfairDisplay-Regular.ttf')
+  format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Glance';
+  src: url('../../public/assets/fonts/GLANCE.ttf')
+  format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Aldo';
+  src: url('../../public/assets/fonts/Aldo.ttf')
+  format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Nowharehouse';
+  src: url('../../public/assets/fonts/Nowharehouse.ttf')
+  format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.font-nowharehouse {
+  font-family: 'Nowharehouse', sans-serif;
+}
+
+.font-aldos {
+  font-family: 'Aldo', sans-serif;
+}
+
+.font-glance {
+  font-family: 'Glance', sans-serif;
+}
+
+.font-payfairldisplay {
+  font-family: 'playfairldisplay', sans-serif;
+}
+
+.font-godofwar {
+  font-family: 'GodOfWar', sans-serif;
+}
 .font-retro-signed {
     font-family: 'CasinoFont', sans-serif;
 }

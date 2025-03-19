@@ -29,7 +29,7 @@ export default function AboutUs() {
                         data-aos="fade-right"
                         data-aos-offset="200">
                         <h1
-                            className="text-4xl sm:text-5xl font-bold text-white tracking-tight"
+                            className="text-4xl sm:text-5xl font-godofwar text-white tracking-tight"
                             data-aos="fade-up"
                             data-aos-delay="200">
                             About US
