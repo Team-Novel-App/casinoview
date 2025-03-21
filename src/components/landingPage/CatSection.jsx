@@ -18,8 +18,8 @@ function App() {
                   <div className="lg:w-0 lg:flex-1">
                     <div className="flex items-center gap-3 mb-4">
                       <Gamepad2 className="w-8 h-8 text-purple-200" />
-                      <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl">
-                        Play & Earn Rewards
+                      <h2 className="text-3xl font-godofwar tracking-tight text-white sm:text-4xl md:text-5xl">
+                        Play And Earn Rewards
                       </h2>
                     </div>
                     <p className="mt-4 max-w-3xl text-lg text-purple-100">

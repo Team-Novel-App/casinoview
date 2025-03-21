@@ -3,8 +3,13 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: [ 'system-ui', 'sans-serif'],
+                sans: ['system-ui', 'sans-serif'],
                 marquee: ['FontMarquee', 'sans-serif'],
+                godofwar: ['GodOfWar', 'sans-serif'],
+                playfairdisplay: ['PlayFairlDisplay', 'sans-serif'],
+                glance: ['Glance', 'sans-serif'],
+                aldo: ['Aldo', 'sans-serif'],
+                nowarehouse: ['Nowharehouse', 'sans-serif'],
             },
             colors: {
                 'game-primary': '#4f46e5',
