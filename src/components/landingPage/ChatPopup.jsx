@@ -2,23 +2,6 @@ import { Gamepad2, X, MessageCircle, Paperclip, Send, Image as ImageIcon, File }
 import { useState, useRef, useEffect } from 'react';
 import { useAuth } from "@/hooks/auth";
 import axios from "@/lib/axios";
-
-const dummyMessages = [
-  {
-    id: '1',
-    sender: 'User',
-    message: 'Hi! I\'m interested in joining the next tournament.',
-    timestamp: new Date(Date.now() - 1800000),
-    attachments: [
-      {
-        type: 'image',
-        url: 'https://images.unsplash.com/photo-1542751371-adc38448a05e',
-        name: 'screenshot.jpg',
-      },
-    ],
-  },
-];
-
 function ChatPopup() {
   const { user } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +9,8 @@ function ChatPopup() {
   const [newMessage, setNewMessage] = useState('');
   const [isDraggingFile, setIsDraggingFile] = useState(false);
   const [hasChat, setHasChat] = useState(false);
-  const [chatInfo,setChatInfo] = useState(null);
+  const [chatInfo, setChatInfo] = useState(null);
+  const [selectedFiles, setSelectedFiles] = useState([]);
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
@@ -55,7 +39,7 @@ function ChatPopup() {
       if (res?.data && Object.keys(res.data).length > 0) {
         setMessages(res.data.messages || []);
         setChatInfo(res.data);
-        setHasChat(true); 
+        setHasChat(true);
       } else {
         setHasChat(false);
       }
@@ -67,12 +51,12 @@ function ChatPopup() {
   const handleCreateChat = async () => {
     try {
       const res = await axios.post('api/chats', {
-        client_id: user.id, 
+        client_id: user.id,
       });
       if (res.data && res.data.chat) {
         setHasChat(true);
-        setChatInfo(res.data.chat); 
-        setMessages([]); 
+        setChatInfo(res.data.chat);
+        setMessages([]);
       }
     } catch (error) {
       console.log(error);
@@ -80,20 +64,26 @@ function ChatPopup() {
   };
 
   const handleSendMessage = async () => {
-    if (newMessage.trim()) {
-      setNewMessage('');
+      const formData = new FormData();
+      formData.append('message', newMessage.trim());
+
+      selectedFiles.forEach((file, index) => {
+        formData.append(`attachments[${index}]`, file);
+      });
+
       try {
-        const res = await axios.post(`api/messages/${chatInfo.id}`, {
-          message: newMessage.trim(),
+        const res = await axios.post(`api/messages/${chatInfo.id}`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
         });
-         setMessages([...messages, res.data.data]);
-        console.log(res.data);
-        
-      }catch (error) {
+        setMessages([...messages, res.data.data]);
+        setNewMessage('');
+        setSelectedFiles([]);
+      } catch (error) {
         console.log(error);
-    }
+      }
   };
-}
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -114,22 +104,34 @@ function ChatPopup() {
   const handleDrop = (e) => {
     e.preventDefault();
     setIsDraggingFile(false);
+    const files = Array.from(e.dataTransfer.files);
+    setSelectedFiles(files);
   };
-  console.log(messages);
+
+  const handleFileSelect = (e) => {
+    const files = Array.from(e.target.files);
+    setSelectedFiles(files);
+  };
 
   return (
     <>
-      {user && (
-        <button
-          onClick={() => setIsOpen(true)}
-          className={`fixed bottom-6 left-6 w-14 h-14 rounded-full bg-game-primary text-white flex items-center justify-center shadow-lg hover:bg-[#4f46e5] transition-colors z-50 ${
-            isOpen ? "opacity-0 pointer-events-none" : "opacity-100"
-          }`}
-        >
-          <MessageCircle className="w-6 h-6" />
-        </button>
-      )}
-
+     {user && (
+      <>
+         <button
+                  onClick={() => setIsOpen(true)}
+                  className={`fixed bottom-6 left-6 w-14 h-14 rounded-full bg-game-primary text-white flex items-center justify-center shadow-lg hover:bg-[#4f46e5] transition-colors z-50 ${
+                    isOpen ? "opacity-0 pointer-events-none" : "opacity-100"
+                  }`}
+                >
+                  <MessageCircle className="w-6 h-6" />
+                </button>
+                {chatInfo?.unread_count > 0 && (
+          <span className="relative -top-1 -right-1 flex items-center justify-center w-5 h-5 bg-red-500 text-white text-xs font-bold rounded-full">
+            {chatInfo?.unread_count}
+          </span>
+        )}
+      </>
+     )}
       {isOpen && (
         <div className="fixed inset-0 bg-gray-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="w-full max-w-2xl bg-gray-900 rounded-lg shadow-xl flex flex-col gradient-border animate-fade-scale-up">
@@ -182,12 +184,12 @@ function ChatPopup() {
                                 key={index}
                                 className="flex items-center gap-2 p-2 rounded bg-gray-700/50"
                               >
-                                {attachment.type === 'image' ? (
+                                {attachment.file_type.includes('image') ? (
                                   <ImageIcon className="w-4 h-4" />
                                 ) : (
                                   <File className="w-4 h-4" />
                                 )}
-                                <span className="text-sm truncate">{attachment.name}</span>
+                                <span className="text-sm truncate">{attachment.file_name}</span>
                               </div>
                             ))}
                           </div>
@@ -205,7 +207,17 @@ function ChatPopup() {
 
                 <div className="p-4 border-t border-gray-800">
                   <div className="flex items-center gap-2">
-                    <button className="text-gray-400 hover:text-white transition-colors">
+                    <input
+                      type="file"
+                      id="file-input"
+                      multiple
+                      style={{ display: 'none' }}
+                      onChange={(e) => handleFileSelect(e)}
+                    />
+                    <button
+                      onClick={() => document.getElementById('file-input').click()}
+                      className="text-gray-400 hover:text-white transition-colors"
+                    >
                       <Paperclip className="w-5 h-5" />
                     </button>
                     <textarea
@@ -223,6 +235,16 @@ function ChatPopup() {
                       <Send className="w-5 h-5" />
                     </button>
                   </div>
+                  {selectedFiles.length > 0 && (
+                    <div className="mt-2 space-y-2">
+                      {selectedFiles.map((file, index) => (
+                        <div key={index} className="flex items-center gap-2 p-2 rounded bg-gray-700/50">
+                          <File className="w-4 h-4" />
+                          <span className="text-sm truncate">{file.name}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </>
             ) : (
