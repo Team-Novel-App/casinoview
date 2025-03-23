@@ -10,6 +10,7 @@ import useEcho from '@/hooks/echo';
 function ChatPopup() {
   const { user } = useAuth();
   const echo = useEcho();
+  const [unreadCount,setUnreadCount] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
@@ -25,6 +26,7 @@ function ChatPopup() {
 
   useEffect(() => {
     if (isOpen) {
+      setUnreadCount(0);
       scrollToBottom();
       document.body.style.overflow = 'hidden';
     } else {
@@ -40,30 +42,53 @@ function ChatPopup() {
   }, []);
 
   useEffect(() => {
+    if (isOpen && chatInfo) {
+      fetchMessages(chatInfo.id);
+    }
+  }, [isOpen]);
+  
+
+  useEffect(() => {
     if (echo && chatInfo) {
       const channel = echo.private(`chat.messages.${chatInfo.id}`);
       channel.listen('MessageSent', (e) => {
         setMessages((prevMessages) => [...prevMessages, e.message]);
+        if(!isOpen){
+          setUnreadCount((prevCount) => prevCount + 1);
+        }
+        if(isOpen){
+          axios.patch(`api/messages/markAsRead/${e.message.id}`);
+        }
       });
 
       return () => {
         channel.stopListening('MessageSent');
       };
     }
-  }, [echo, chatInfo]);
+  }, [echo, chatInfo,isOpen]);
 
   const fetchChat = async () => {
     try {
       const res = await axios.get('api/chats');
       if (res?.data && Object.keys(res.data).length > 0) {
-        setMessages(res.data.messages || []);
+       // setMessages(res.data.messages || []);
         setChatInfo(res.data);
         setHasChat(true);
+        setUnreadCount(res.data.unread_count || 0)
       } else {
         setHasChat(false);
       }
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const fetchMessages = async (chatId) => {
+    try {
+      const res = await axios.patch(`api/messages/${chatId}`);
+      setMessages(res.data);
+    } catch (error) {
+      console.error("Failed to fetch messages:", error);
     }
   };
 
@@ -98,7 +123,6 @@ function ChatPopup() {
           'Content-Type': 'multipart/form-data',
         },
       });
-    //  setMessages([...messages, res.data.data]);
       setNewMessage('');
       setSelectedFiles([]);
     } catch (error) {
@@ -140,20 +164,19 @@ function ChatPopup() {
   return (
     <>
       {user && (
-        <>
-          <button
-            onClick={() => setIsOpen(true)}
-            className={`fixed bottom-6 left-6 w-14 h-14 rounded-full bg-game-primary text-white flex items-center justify-center shadow-lg hover:bg-[#4f46e5] transition-colors z-50 ${
-              isOpen ? "opacity-0 pointer-events-none" : "opacity-100"
-            }`}
-          >
-            <MessageCircle className="w-6 h-6" />
-          </button>
-          {chatInfo?.unread_count > 0 && (
-            <span className="absolute top-0 right-0 flex items-center justify-center w-5 h-5 bg-red-500 text-white text-xs font-bold rounded-full">
-              {chatInfo.unread_count}
-            </span>
-          )}
+        <><button
+        onClick={() => setIsOpen(true)}
+        className={`fixed bottom-6 left-6 w-14 h-14 rounded-full bg-game-primary text-white flex items-center justify-center shadow-lg hover:bg-[#4f46e5] transition-colors z-50 ${
+          isOpen ? "opacity-0 pointer-events-none" : "opacity-100"
+        }`}
+      >
+        <MessageCircle className="w-6 h-6" />
+        {unreadCount > 0 && (
+          <span className="absolute top-0 right-0 flex items-center justify-center w-5 h-5 bg-red-500 text-white text-xs font-bold rounded-full">
+            {unreadCount}
+          </span>
+        )}
+      </button>
         </>
       )}
       {isOpen && (
@@ -205,23 +228,25 @@ function ChatPopup() {
                         }`}
                       >
                         <p className="whitespace-pre-wrap">{msg.message}</p>
-                        {msg.attachments && msg.attachments.length > 0 && (
-                          <div className="mt-2 space-y-2">
-                            {msg.attachments.map((attachment, index) => (
-                              <div
-                                key={index}
-                                className="flex items-center gap-2 p-2 rounded bg-gray-700/50"
-                              >
-                                {attachment.file_type.includes('image') ? (
-                                  <ImageIcon className="w-4 h-4" />
-                                ) : (
-                                  <File className="w-4 h-4" />
-                                )}
-                                <span className="text-sm truncate">{attachment.file_name}</span>
-                              </div>
-                            ))}
-                          </div>
-                        )}
+                        {msg.attachments && msg.attachments.map((attachment, index) => (
+                            <div key={index}>
+                              {attachment.file_type.includes('image') ? (
+                                <img
+                                  src={attachment.file_url}
+                                  alt={attachment.file_name}
+                                  className="max-w-full h-auto rounded-lg"
+                                />
+                              ) : (
+                                <a
+                                  href={attachment.file_url}
+                                  download={attachment.file_name}
+                                  className="text-sm text-blue-400 hover:text-blue-300"
+                                >
+                                  Download {attachment.file_name}
+                                </a>
+                              )}
+                            </div>
+                          ))}
                       </div>
                     </div>
                   ))}
