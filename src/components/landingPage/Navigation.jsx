@@ -13,13 +13,28 @@ import {
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/hooks/auth'
 import Image from 'next/image'
+import useSWR from 'swr'
+import axios from '@/lib/axios'
+
+const fetchFnc = async () => {
+    const response = await axios.get('api/chats/online');
+    return response.data;
+};
 
 export default function Navigation({ isScrolled }) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const [isProfileOpen, setIsProfileOpen] = useState(false)
     const { user, logout } = useAuth()
-    const router = useRouter()
-
+    const router = useRouter();
+    const { data } = useSWR(
+      user ? "/api/chats/online" : null, 
+      fetchFnc,
+      {
+        revalidateOnFocus: false,
+        refreshInterval: 60000, 
+      }
+    );
+    
     const handleJoinClick = () => {
         router.push('/users')
     }
