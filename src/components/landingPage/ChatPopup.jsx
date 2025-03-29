@@ -215,7 +215,13 @@ function ChatPopup() {
                       }`}
                     >
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="text-sm text-gray-400">{msg.sender.name}</span>
+                      {msg.sender_id === user.id  && (
+                        msg.is_read ? (
+                               <span className="text-sm text-green-400">seen</span>
+                           ) : (
+                                    <span className="text-sm text-gray-500">sent</span>
+                          )
+                                )}
                         <span className="text-xs text-gray-500">
                           {new Date(msg.created_at).toLocaleTimeString()}
                         </span>
