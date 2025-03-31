@@ -17,20 +17,17 @@ const fallbackSlides = [
     {
         image: '/assets/images/heroSectionImg/img2.jpg',
         title: 'Discount at pre-registration',
-        subtitle:
-            'Join the ultimate gaming community where legends are born. Compete in tournaments, connect with fellow gamers, and embrace victory.',
+        subtitle: 'Join the ultimate gaming community where legends are born. Compete in tournaments, connect with fellow gamers, and embrace victory.',
     },
     {
         image: '/assets/images/heroSectionImg/img1.jpg',
         title: 'Spin the wheel of your success',
-        subtitle:
-            'Enter tournaments with massive prize pools and prove your worth against the best players worldwide.',
+        subtitle: 'Enter tournaments with massive prize pools and prove your worth against the best players worldwide.',
     },
     {
         image: '/assets/images/heroSectionImg/img2.jpg',
         title: 'Play Roulette and Win Big',
-        subtitle:
-            'Connect with millions of players, share your achievements, and make lasting friendships in our vibrant community.',
+        subtitle: 'Connect with millions of players, share your achievements, and make lasting friendships in our vibrant community.',
     },
 ]
 
@@ -43,15 +40,12 @@ export default function HeroSection() {
             try {
                 const response = await axios.get('/api/active-banners')
                 const data = response.data
-                const validBanners =
-                    data.banners?.map(banner => ({
-                        ...banner,
-                        image_url: banner.image_url || null,
-                        image: banner.image || null,
-                    })) || []
-                setBanners(
-                    validBanners.length > 0 ? validBanners : fallbackSlides,
-                )
+                const validBanners = data.banners?.map(banner => ({
+                    ...banner,
+                    image_url: banner.image_url || null,
+                    image: banner.image || null,
+                })) || []
+                setBanners(validBanners.length > 0 ? validBanners : fallbackSlides)
             } catch (error) {
                 console.error('Error fetching banners:', error)
                 setBanners(fallbackSlides)
@@ -76,7 +70,7 @@ export default function HeroSection() {
     return (
         <section
             id="home"
-            className="relative h-screen flex flex-col overflow-hidden bg-gray-900">
+            className="relative h-screen md:h-[90vh] flex flex-col overflow-hidden bg-gray-900">
             <div className="relative h-full">
                 <Swiper
                     modules={[Autoplay, Navigation, Pagination]}
@@ -84,8 +78,15 @@ export default function HeroSection() {
                     slidesPerView={1}
                     autoplay={{ delay: 7000, disableOnInteraction: false }}
                     speed={1200}
-                    navigation
-                    pagination={{ clickable: true }}
+                    navigation={{
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    }}
+                    pagination={{ 
+                        clickable: true,
+                        el: '.swiper-pagination',
+                        type: 'bullets',
+                    }}
                     loop={banners.length > 1}
                     className="h-full">
                     {banners.map((slide, index) => (
@@ -97,41 +98,41 @@ export default function HeroSection() {
                                         src={
                                             slide.image_url
                                                 ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${slide.image_url}`
-                                                : slide.image ||
-                                                  '/assets/images/placeholder.jpg'
+                                                : slide.image || '/assets/images/placeholder.jpg'
                                         }
                                         alt={slide.title || 'Slide image'}
                                         fill={true}
+                                        priority={index === 0} // Only prioritize first image
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 100vw"
                                         style={{ objectFit: 'cover' }}
                                     />
                                 </div>
-                                <div className="relative z-20 h-full container mx-auto py-6 flex items-center">
+                                <div className="relative z-20 h-full container mx-auto px-4 sm:px-6 py-6 flex items-center">
                                     <div className="max-w-3xl">
                                         <h1
-                                            className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 sm:text-4xl md:text-5xl lg:text-8xl font-aldo leading-[1] mb-4 sm:mb-6"
+                                            className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-aldo leading-tight mb-3 sm:mb-4 md:mb-6"
                                             data-aos="fade-up">
                                             {slide.title}
                                         </h1>
                                         <p
-                                            className="text-white text-base sm:text-lg mb-6 sm:mb-8 max-w-xl"
+                                            className="text-white text-sm sm:text-base md:text-lg mb-4 sm:mb-6 md:mb-8 max-w-md sm:max-w-xl"
                                             data-aos="fade-up"
                                             data-aos-delay="500">
-                                            {slide.description ||
-                                                slide.subtitle}
+                                            {slide.description || slide.subtitle}
                                         </p>
                                         <div
-                                            className="flex flex-col sm:flex-row gap-2 sm:gap-4"
+                                            className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4"
                                             data-aos="fade-up"
                                             data-aos-delay="700">
                                             <button
                                                 onClick={handleJoinClick}
-                                                className="text-white gradient-border bg-gray-900/50 backdrop-blur-sm px-6 sm:px-8 py-3 font-medium transition-transform hover:scale-105 flex items-center justify-center gap-2">
+                                                className="text-white gradient-border bg-gray-900/50 backdrop-blur-sm px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base font-medium transition-transform hover:scale-105 flex items-center justify-center gap-1 sm:gap-2">
                                                 Join Now{' '}
-                                                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                                                <ChevronRight className="w-4 h-4" />
                                             </button>
                                             <a
                                                 href="#about"
-                                                className="text-white border border-game-primary hover:bg-game-primary/10 px-6 sm:px-8 py-3 rounded-full font-medium transition backdrop-blur-sm flex items-center justify-center">
+                                                className="text-white border border-game-primary hover:bg-game-primary/10 px-4 sm:px-6 py-2 sm:py-3 rounded-full text-sm sm:text-base font-medium transition backdrop-blur-sm flex items-center justify-center">
                                                 Learn More
                                             </a>
                                         </div>
@@ -142,7 +143,12 @@ export default function HeroSection() {
                     ))}
                 </Swiper>
 
-                <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 swiper-pagination"></div>
+                {/* Custom pagination for better mobile visibility */}
+                <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 swiper-pagination !flex !justify-center !gap-1"></div>
+                
+                {/* Navigation buttons with better mobile handling */}
+                <div className="swiper-button-next !hidden sm:!flex !text-white !w-10 !h-10 after:!text-sm md:after:!text-base"></div>
+                <div className="swiper-button-prev !hidden sm:!flex !text-white !w-10 !h-10 after:!text-sm md:after:!text-base"></div>
             </div>
         </section>
     )
