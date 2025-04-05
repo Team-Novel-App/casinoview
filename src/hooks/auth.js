@@ -12,6 +12,11 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             .get('/api/user')
             .then(res => res.data)
             .catch(error => {
+                if (error.response.status === 403) {
+                    // Admin session detected and cleared by backend, just redirect
+                    window.location.pathname = '/login'
+                    return null
+                }
                 if (error.response.status !== 409) throw error
 
                // router.push('/verify-email')
