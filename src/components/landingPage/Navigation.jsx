@@ -45,17 +45,19 @@ export default function Navigation({ isScrolled }) {
 
     return (
         <nav
-            className={`fixed left-0 right-0 mx-auto z-50 transition-all bg-gradient-to-r from-[#d5d3ae]  via-[#a09a63] to-[#534c28] duration-300 ${isScrolled ? 'w-full sm:px-4 py-5 lg:px-10 ' : 'w-[95%] border-white lg:rounded-full md:rounded-full sm:rounded-4xl mt-8 px-4 py-5'} `}>
-            <div className=" px-4 w-full mr-10">
-                <div className="flex items-center justify-between">
+            className={'fixed top-0 left-0 right-0 z-50 transition-all bg-gradient-to-r from-[#d5d3ae] via-[#a09a63] to-[#534c28] duration-300 w-full px-4 py-5'}>
+            <div className="max-w-8xl mx-auto px-4">
+                <div className="flex items-center justify-between w-full">
+                    {/* Logo - Far Left */}
                     <div className="flex items-center gap-2">
                         <Dice6 className="w-9 h-9 text-[#4f46e5] animate-float" />
-                        <span className="text-xl  bg-clip-text font-FontMarquee bg-gradient-to-r font-test from-[#4f46e5] via-[#605C66] to-[#322C3C] text-transparent">
+                        <span className="text-xl bg-clip-text font-FontMarquee bg-gradient-to-r font-test from-[#4f46e5] via-[#605C66] to-[#322C3C] text-transparent">
                             CASINO PLAY
                         </span>
                     </div>
 
-                    <div className="hidden md:flex items-center gap-9 my-1">
+                    {/* Center Navigation Links */}
+                    <div className="hidden md:flex items-center gap-9 my-1 absolute left-1/2 transform -translate-x-1/2">
                         <a
                             href="#home"
                             className="text-[#0d012e] text-[20px] font-aldo transition-transform hover:scale-125 duration-200 hover:text-white">
@@ -78,7 +80,8 @@ export default function Navigation({ isScrolled }) {
                         </a>
                     </div>
 
-                    <div className="flex items-center gap-4">
+                    {/* Profile/Join Button - Far Right */}
+                    <div className="flex items-center gap-4 ml-auto">
                         <div className="md:hidden">
                             <button
                                 onClick={() =>
@@ -169,7 +172,7 @@ export default function Navigation({ isScrolled }) {
                     <div className="md:hidden bg-gray-300 mt-4 p-4 rounded-lg">
                         {user && (
                             <div className="flex items-center bg-gray-400 rounded-lg shadow-md justify-between relative">
-                                <p className="text-center font-semibold text-gray-800  px-4 py-2 ">
+                                <p className="text-center font-semibold text-gray-800 px-4 py-2">
                                     Hello, {user?.name}{' '}
                                 </p>
                                 <div className="relative w-8 h-8">
@@ -211,14 +214,14 @@ export default function Navigation({ isScrolled }) {
                                 <div className="flex flex-col gap-2">
                                     <button
                                         onClick={handleLogout}
-                                        className="w-full text-white font-extralight gradient-border bg-gray-900  px-6 py-2">
+                                        className="w-full text-white font-extralight gradient-border bg-gray-900 px-6 py-2">
                                         Logout
                                     </button>
                                 </div>
                             ) : (
                                 <button
                                     onClick={handleJoinClick}
-                                    className="text-[#0d012e] bg-[#bdbb9a] rounded-xl border-2 font-aldo border-black boreder-opacity-40  px-6 py-2 font-medium w-full">
+                                    className="text-[#0d012e] bg-[#bdbb9a] rounded-xl border-2 font-aldo border-black boreder-opacity-40 px-6 py-2 font-medium w-full">
                                     JOIN NOW
                                 </button>
                             )}
