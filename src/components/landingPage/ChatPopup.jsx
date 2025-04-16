@@ -6,6 +6,7 @@ import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { useAuth } from "@/hooks/auth";
 import axios from "@/lib/axios";
 import useEcho from '@/hooks/echo';
+import VoiceRecorder from '../VoiceRecorder';
 
 function ChatPopup() {
   const { user } = useAuth();
@@ -234,6 +235,15 @@ function ChatPopup() {
                         }`}
                       >
                         <p className="whitespace-pre-wrap">{msg.message}</p>
+                        {msg.voice_message_path && (
+                          <div className="mt-2">
+                            <audio
+                              controls
+                              src={msg.voice_message_path}
+                              className="w-full"
+                            />
+                          </div>
+                        )}
                         {msg.attachments && msg.attachments.map((attachment, index) => (
                             <div key={index}>
                               {attachment.file_type.includes('image') ? (
@@ -271,6 +281,28 @@ function ChatPopup() {
                       style={{ display: 'none' }}
                       onChange={handleFileSelect}
                     />
+                     <VoiceRecorder
+                    onRecordingComplete={(audioBlob) => {
+                      const formData = new FormData();
+                      formData.append(
+                        "voice_message",
+                        audioBlob,
+                        `voice-${Date.now()}.wav`
+                      );
+                      formData.append("chat_id", String(chatInfo?.id));
+
+                      axios
+                        .post(`api/messages/${chatInfo?.id}`, formData, {
+                          headers: {
+                            "Content-Type": "multipart/form-data",
+                          },
+                        })
+                        .catch((error) => {
+                          console.error("Error sending voice message:", error);
+                          // Handle error appropriately
+                        });
+                    }}
+                  />
                     <textarea
                       value={newMessage}
                       onChange={(e) => setNewMessage(e.target.value)}
