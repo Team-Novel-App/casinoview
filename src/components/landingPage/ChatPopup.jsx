@@ -167,7 +167,7 @@ function ChatPopup() {
       {user && (
         <><button
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-6 left-6 w-14 h-14 rounded-full bg-game-primary text-white flex items-center justify-center shadow-lg hover:bg-[#4f46e5] transition-colors z-50 ${
+        className={`fixed bottom-6 right-6 w-14 h-14 rounded-full bg-game-primary text-white flex items-center justify-center shadow-lg hover:bg-[#4f46e5] transition-colors z-50 ${
           isOpen ? "opacity-0 pointer-events-none" : "opacity-100"
         }`}
       >
