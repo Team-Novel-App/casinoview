@@ -1,11 +1,33 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Gift, Award, Star, Trophy, Clock, Gamepad2, Flame, Target } from 'lucide-react';
 import { useAuth } from "@/hooks/auth";
+import axios from '@/lib/axios';
+
+const defaultBanner = {
+  heading: 'Play And Earn Rewards',
+  text: 'Join our gaming community and earn amazing rewards! Play our featured games, compete with others, and collect points for exclusive rewards.',
+  is_active: true
+};
 
 function App() {
   const { user } = useAuth();
+  const [banner, setBanner] = useState(defaultBanner);
+
+  useEffect(() => {
+    const fetchBanner = async () => {
+      try {
+        const response = await axios.get('/api/cta-banner');
+        setBanner(response.data || defaultBanner);
+      } catch (error) {
+        console.error('Error fetching CTA banner:', error);
+        setBanner(defaultBanner);
+      }
+    };
+
+    fetchBanner();
+  }, []);
 
   return (
     <section className="min-h-[400px] bg-gray-900">
@@ -19,11 +41,11 @@ function App() {
                     <div className="flex items-center gap-3 mb-4">
                       <Gamepad2 className="w-8 h-8 text-purple-200" />
                       <h2 className="text-3xl font-godofwar tracking-tight text-white sm:text-4xl md:text-5xl">
-                        Play And Earn Rewards
+                        {banner.heading}
                       </h2>
                     </div>
                     <p className="mt-4 max-w-3xl text-lg text-purple-100">
-                      Join our gaming community and earn amazing rewards! Play our featured games, compete with others, and collect points for exclusive rewards.
+                      {banner.text}
                     </p>
                   </div>
                   <div className="mt-8 lg:mt-0 lg:flex-shrink-0 lg:ml-8">
