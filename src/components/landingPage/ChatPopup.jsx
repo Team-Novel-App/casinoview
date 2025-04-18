@@ -7,6 +7,9 @@ import { useAuth } from "@/hooks/auth";
 import axios from "@/lib/axios";
 import useEcho from '@/hooks/echo';
 import VoiceRecorder from '../VoiceRecorder';
+import AudioPlayer from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
+
 
 function ChatPopup() {
   const { user } = useAuth();
@@ -235,6 +238,23 @@ function ChatPopup() {
                         }`}
                       >
                         <p className="whitespace-pre-wrap">{msg.message}</p>
+                        {
+                          msg.voice_message_path && (
+                            <div className="mt-2">
+                                <AudioPlayer
+                            autoPlay={false}
+                            // showJumpControls={false}
+                            showPlayControl={false}
+                            // showVolumeControl={false}
+                            // showRepeatControl={false}
+                            // showPlaylist={false}
+                            // showSkipControls={false}
+                            src={msg.voice_message_path} // From your Laravel API
+                            onPlay={e => console.log("onPlay")}
+                          />
+                            </div>
+                          )
+                        }
                         {/* {msg.voice_message_path && (
                           <div className="mt-2">
                             <audio
@@ -244,9 +264,8 @@ function ChatPopup() {
                             />
                           </div>
                         )} */}
-                        {msg.voice_message_path && (
+                        {/* {msg.voice_message_path && (
   <div className="mt-2">
-    {/* Custom audio player with fallback */}
     <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 p-2 rounded-lg">
       <button
         onClick={() => {
@@ -261,8 +280,6 @@ function ChatPopup() {
       </button>
       
       <span className="text-sm text-gray-700 dark:text-gray-300">Voice Message</span>
-      
-      {/* Fallback download link */}
       <a 
         href={msg.voice_message_path} 
         download
@@ -271,16 +288,15 @@ function ChatPopup() {
         Download
       </a>
     </div>
-
-    {/* Still include native audio as fallback for browsers that support it */}
     <audio
       controls
       src={msg.voice_message_path}
       className="w-full mt-2 hidden md:block"
     />
   </div>
-)}
-                        {msg.attachments && msg.attachments.map((attachment, index) => (
+)}   */}
+                
+                {msg.attachments && msg.attachments.map((attachment, index) => (
                             <div key={index}>
                               {attachment.file_type.includes('image') ? (
                                 <img
