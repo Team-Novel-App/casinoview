@@ -238,7 +238,7 @@ function ChatPopup() {
                         }`}
                       >
                         <p className="whitespace-pre-wrap">{msg.message}</p>
-                        {
+                        {/* {
                           msg.voice_message_path && (
                             <div className="mt-2">
                                 <AudioPlayer
@@ -254,7 +254,7 @@ function ChatPopup() {
                           />
                             </div>
                           )
-                        }
+                        } */}
                         {/* {msg.voice_message_path && (
                           <div className="mt-2">
                             <audio
@@ -264,37 +264,37 @@ function ChatPopup() {
                             />
                           </div>
                         )} */}
-                        {/* {msg.voice_message_path && (
-  <div className="mt-2">
-    <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 p-2 rounded-lg">
-      <button
-        onClick={() => {
-          const audio = new Audio(msg.voice_message_path);
-          audio.play().catch(e => console.error("Audio playback failed:", e));
-        }}
-        className="p-2 bg-blue-500 text-white rounded-full hover:bg-blue-600"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
-        </svg>
-      </button>
-      
-      <span className="text-sm text-gray-700 dark:text-gray-300">Voice Message</span>
-      <a 
-        href={msg.voice_message_path} 
-        download
-        className="ml-auto text-sm text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
-      >
-        Download
-      </a>
-    </div>
-    <audio
-      controls
-      src={msg.voice_message_path}
-      className="w-full mt-2 hidden md:block"
-    />
-  </div>
-)}   */}
+                        {msg.voice_message_path && (
+                             <div className="mt-2">
+                               <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 p-2 rounded-lg">
+                                 <button
+                                   onClick={() => {
+                                     const audio = new Audio(msg.voice_message_path);
+                                     audio.play().catch(e => console.error("Audio playback failed:", e));
+                                   }}
+                                   className="p-2 bg-blue-500 text-white rounded-full hover:bg-blue-600"
+                                 >
+                                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+                                   </svg>
+                                 </button>
+                                 
+                                 <span className="text-sm text-gray-700 dark:text-gray-300">Voice Message</span>
+                                 <a 
+                                   href={msg.voice_message_path} 
+                                   download
+                                   className="ml-auto text-sm text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                                 >
+                                   Download
+                                 </a>
+                               </div>
+                               <audio
+                                 controls
+                                 src={msg.voice_message_path}
+                                 className="w-full mt-2 hidden md:block"
+                               />
+                             </div>
+                           )}  
                 
                 {msg.attachments && msg.attachments.map((attachment, index) => (
                             <div key={index}>
